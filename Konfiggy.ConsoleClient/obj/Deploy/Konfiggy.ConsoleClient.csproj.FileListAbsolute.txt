@@ -1,4 +1,3 @@
-C:\SourceControl\Konfiggy\Konfiggy.ConsoleClient\bin\Deploy\KonfiggyBuildConfigurationInjector.ps1
 C:\SourceControl\Konfiggy\Konfiggy.ConsoleClient\bin\Deploy\Konfiggy.ConsoleClient.exe.config
 C:\SourceControl\Konfiggy\Konfiggy.ConsoleClient\bin\Deploy\Konfiggy.ConsoleClient.exe
 C:\SourceControl\Konfiggy\Konfiggy.ConsoleClient\bin\Deploy\Konfiggy.ConsoleClient.pdb

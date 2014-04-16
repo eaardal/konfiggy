@@ -10,21 +10,12 @@ namespace Konfiggy.TagStrategies
         public string GetEnvironmentTag()
         {
             string value = TryGetValueFromUserVariables();
+            if (!String.IsNullOrEmpty(value)) return value;
 
-            if (String.IsNullOrEmpty(value))
-            {
-                Debug.WriteLine("Could not find any \"Konfiggy\" environment user variable");
-                value = TryGetValueFromSystemVariables();
+            value = TryGetValueFromSystemVariables();
+            if (!String.IsNullOrEmpty(value)) return value;
 
-                if (String.IsNullOrEmpty(value))
-                {
-                    Debug.WriteLine("Could not find any \"Konfiggy\" environment system variable");
-                    return null;
-                }
-            }
-
-            Debug.WriteLine("Found \"Konfiggy\" environment variable: {0}", value);
-            return value;
+            return null;
         }
 
         private string TryGetValueFromUserVariables()

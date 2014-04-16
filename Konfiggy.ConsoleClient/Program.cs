@@ -11,8 +11,8 @@ namespace Konfiggy.ConsoleClient
         {
             Konfiggy.Initialize(new GlobalConfigFileVariableTagStrategy());
 
-            string myFilePath2 = Konfiggy.GetAppSetting("MyFile");
-            Debug.WriteLine(myFilePath2);
+            string myFilePath = Konfiggy.GetAppSetting("MyFile");
+            Debug.WriteLine(myFilePath);
 
             Console.ReadLine();
         }
