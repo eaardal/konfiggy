@@ -1,0 +1,9 @@
+C:\SourceControl\Konfiggy\Konfiggy.ConsoleClient\bin\Deploy\KonfiggyBuildConfigurationInjector.ps1
+C:\SourceControl\Konfiggy\Konfiggy.ConsoleClient\bin\Deploy\Konfiggy.ConsoleClient.exe.config
+C:\SourceControl\Konfiggy\Konfiggy.ConsoleClient\bin\Deploy\Konfiggy.ConsoleClient.exe
+C:\SourceControl\Konfiggy\Konfiggy.ConsoleClient\bin\Deploy\Konfiggy.ConsoleClient.pdb
+C:\SourceControl\Konfiggy\Konfiggy.ConsoleClient\bin\Deploy\Konfiggy.dll
+C:\SourceControl\Konfiggy\Konfiggy.ConsoleClient\bin\Deploy\Konfiggy.pdb
+C:\SourceControl\Konfiggy\Konfiggy.ConsoleClient\obj\Deploy\Konfiggy.ConsoleClient.csprojResolveAssemblyReference.cache
+C:\SourceControl\Konfiggy\Konfiggy.ConsoleClient\obj\Deploy\Konfiggy.ConsoleClient.exe
+C:\SourceControl\Konfiggy\Konfiggy.ConsoleClient\obj\Deploy\Konfiggy.ConsoleClient.pdb

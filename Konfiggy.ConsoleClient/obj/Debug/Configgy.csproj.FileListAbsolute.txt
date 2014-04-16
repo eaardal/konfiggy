@@ -1,0 +1,6 @@
+C:\SourceControl\Configgy\Configgy\bin\Debug\Configgy.exe.config
+C:\SourceControl\Configgy\Configgy\bin\Debug\Configgy.exe
+C:\SourceControl\Configgy\Configgy\bin\Debug\Configgy.pdb
+C:\SourceControl\Configgy\Configgy\obj\Debug\Configgy.csprojResolveAssemblyReference.cache
+C:\SourceControl\Configgy\Configgy\obj\Debug\Configgy.exe
+C:\SourceControl\Configgy\Configgy\obj\Debug\Configgy.pdb

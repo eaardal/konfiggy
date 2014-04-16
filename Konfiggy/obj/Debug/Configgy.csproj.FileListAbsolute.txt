@@ -1,0 +1,4 @@
+C:\SourceControl\Configgy\Configgy\bin\Debug\Configgy.dll
+C:\SourceControl\Configgy\Configgy\bin\Debug\Configgy.pdb
+C:\SourceControl\Configgy\Configgy\obj\Debug\Configgy.dll
+C:\SourceControl\Configgy\Configgy\obj\Debug\Configgy.pdb
