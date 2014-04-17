@@ -1,14 +1,24 @@
 ﻿using System;
-using System.Diagnostics;
+using Konfiggy.Exceptions;
 
 namespace Konfiggy.TagStrategies
 {
     public class EnvironmentVariableTagStrategy : IEnvironmentTagStrategy
     {
-        private const string KonfiggyIdentifier = "Konfiggy";
+        public string KonfiggyIdentifier { get; set; }
+        public IEnvironment SystemEnvironment { get; set; }
+
+        public EnvironmentVariableTagStrategy()
+        {
+            SystemEnvironment = new SystemEnvironment();
+            KonfiggyIdentifier = "Konfiggy";
+        }
 
         public string GetEnvironmentTag()
         {
+            if (SystemEnvironment == null) throw new KonfiggyEnvironmentNotSetException("Please provide an implementation of IEnvironment before calling GetEnvironmentTag()");
+            if (String.IsNullOrEmpty(KonfiggyIdentifier)) throw new KonfiggyIdentifierNotSetException("Please provide a value for the KonfiggyIdentifier property before calling GetEnvironmentTag()");
+
             string value = TryGetValueFromUserVariables();
             if (!String.IsNullOrEmpty(value)) return value;
 
@@ -20,12 +30,12 @@ namespace Konfiggy.TagStrategies
 
         private string TryGetValueFromUserVariables()
         {
-            return Environment.GetEnvironmentVariable(KonfiggyIdentifier, EnvironmentVariableTarget.User);
+            return SystemEnvironment.GetEnvironmentVariable(KonfiggyIdentifier, EnvironmentVariableTarget.User);
         }
 
         private string TryGetValueFromSystemVariables()
         {
-            return Environment.GetEnvironmentVariable(KonfiggyIdentifier, EnvironmentVariableTarget.Machine);
+            return SystemEnvironment.GetEnvironmentVariable(KonfiggyIdentifier, EnvironmentVariableTarget.Machine);
         }
     }
 }

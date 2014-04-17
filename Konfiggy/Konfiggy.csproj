@@ -50,14 +50,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationKeeper.cs" />
+    <Compile Include="Exceptions\KonfiggyIdentifierNotSetException.cs" />
     <Compile Include="Exceptions\KonfiggyConfigurationKeeperNotSetException.cs" />
+    <Compile Include="Exceptions\KonfiggyEnvironmentNotSetException.cs" />
     <Compile Include="Exceptions\KonfiggyNoTagStrategiesSet.cs" />
     <Compile Include="IConfigurationKeeper.cs" />
+    <Compile Include="IEnvironment.cs" />
     <Compile Include="Konfiggy.cs" />
     <Compile Include="Exceptions\KonfiggyEnvironmentTagNotFoundException.cs" />
     <Compile Include="Exceptions\KonfiggyNoConfigurationKeyFoundException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="KonfiggyConfigSection.cs" />
+    <Compile Include="SystemEnvironment.cs" />
     <Compile Include="TagStrategies\EnvironmentVariableTagStrategy.cs" />
     <Compile Include="TagStrategies\GlobalConfigFileVariableTagStrategy.cs" />
     <Compile Include="TagStrategies\IEnvironmentTagStrategy.cs" />
