@@ -1,0 +1,11 @@
+C:\SourceControl\Konfiggy\Konfiggy.Tests.Unit\bin\Debug\Konfiggy.Tests.Unit.dll
+C:\SourceControl\Konfiggy\Konfiggy.Tests.Unit\bin\Debug\Konfiggy.Tests.Unit.pdb
+C:\SourceControl\Konfiggy\Konfiggy.Tests.Unit\bin\Debug\Konfiggy.dll
+C:\SourceControl\Konfiggy\Konfiggy.Tests.Unit\bin\Debug\nunit.framework.dll
+C:\SourceControl\Konfiggy\Konfiggy.Tests.Unit\bin\Debug\Konfiggy.pdb
+C:\SourceControl\Konfiggy\Konfiggy.Tests.Unit\bin\Debug\nunit.framework.xml
+C:\SourceControl\Konfiggy\Konfiggy.Tests.Unit\obj\Debug\Konfiggy.Tests.Unit.csprojResolveAssemblyReference.cache
+C:\SourceControl\Konfiggy\Konfiggy.Tests.Unit\obj\Debug\Konfiggy.Tests.Unit.dll
+C:\SourceControl\Konfiggy\Konfiggy.Tests.Unit\obj\Debug\Konfiggy.Tests.Unit.pdb
+C:\SourceControl\Konfiggy\Konfiggy.Tests.Unit\bin\Debug\Moq.dll
+C:\SourceControl\Konfiggy\Konfiggy.Tests.Unit\bin\Debug\Moq.xml

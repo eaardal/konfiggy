@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace Konfiggy.TagStrategies
 {
-    public class EnvironmentVariableTagStrategy : IKonfiggyTagStrategy
+    public class EnvironmentVariableTagStrategy : IEnvironmentTagStrategy
     {
         private const string KonfiggyIdentifier = "Konfiggy";
 

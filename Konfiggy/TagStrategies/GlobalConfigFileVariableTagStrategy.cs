@@ -2,7 +2,7 @@
 
 namespace Konfiggy.TagStrategies
 {
-    public class GlobalConfigFileVariableTagStrategy : IKonfiggyTagStrategy
+    public class GlobalConfigFileVariableTagStrategy : IEnvironmentTagStrategy
     {
         public string GetEnvironmentTag()
         {

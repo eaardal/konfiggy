@@ -49,6 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationKeeper.cs" />
+    <Compile Include="Exceptions\KonfiggyConfigurationKeeperNotSetException.cs" />
+    <Compile Include="Exceptions\KonfiggyNoTagStrategiesSet.cs" />
+    <Compile Include="IConfigurationKeeper.cs" />
     <Compile Include="Konfiggy.cs" />
     <Compile Include="Exceptions\KonfiggyEnvironmentTagNotFoundException.cs" />
     <Compile Include="Exceptions\KonfiggyNoConfigurationKeyFoundException.cs" />
@@ -56,7 +60,7 @@
     <Compile Include="KonfiggyConfigSection.cs" />
     <Compile Include="TagStrategies\EnvironmentVariableTagStrategy.cs" />
     <Compile Include="TagStrategies\GlobalConfigFileVariableTagStrategy.cs" />
-    <Compile Include="TagStrategies\IKonfiggyTagStrategy.cs" />
+    <Compile Include="TagStrategies\IEnvironmentTagStrategy.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
