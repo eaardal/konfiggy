@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using Konfiggy;
+using Konfiggy.Helpers;
 using Konfiggy.TagStrategies;
 
 namespace Konfiggy.ConsoleClient
@@ -9,10 +10,10 @@ namespace Konfiggy.ConsoleClient
     {
         static void Main(string[] args)
         {
-            Konfiggy.Initialize(new GlobalConfigFileVariableTagStrategy());
+            Konfiggy.Initialize(new ConfigFileGlobalVariableTagStrategy(), new ConfigurationKeeper());
 
             string myFilePath = Konfiggy.GetAppSetting("MyFile");
-            Debug.WriteLine(myFilePath);
+            Console.WriteLine(myFilePath);
 
             Console.ReadLine();
         }

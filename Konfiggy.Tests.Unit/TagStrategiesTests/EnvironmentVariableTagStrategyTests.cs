@@ -1,5 +1,6 @@
 ﻿using System;
 using Konfiggy.Exceptions;
+using Konfiggy.Helpers;
 using Konfiggy.TagStrategies;
 using Moq;
 using NUnit.Framework;
@@ -12,7 +13,7 @@ namespace Konfiggy.Tests.Unit.TagStrategiesTests
         [Test]
         public void GetEnvironmentTag_WhenValueExistsInUserVariables_ReturnsValue()
         {
-            var env = new Mock<IEnvironment>();
+            var env = new Mock<ISystemEnvironment>();
             env.Setup(ctx => ctx.GetEnvironmentVariable("Konfiggy", EnvironmentVariableTarget.User)).Returns("Local");
 
             var tagStrat = new EnvironmentVariableTagStrategy { SystemEnvironment = env.Object };
@@ -24,7 +25,7 @@ namespace Konfiggy.Tests.Unit.TagStrategiesTests
         [Test]
         public void GetEnvironmentTag_WhenValueExistsInSystemVariables_ReturnsValue()
         {
-            var env = new Mock<IEnvironment>();
+            var env = new Mock<ISystemEnvironment>();
             env.Setup(ctx => ctx.GetEnvironmentVariable("Konfiggy", EnvironmentVariableTarget.User)).Returns(() => null);
             env.Setup(ctx => ctx.GetEnvironmentVariable("Konfiggy", EnvironmentVariableTarget.Machine)).Returns("QA");
 
@@ -38,7 +39,7 @@ namespace Konfiggy.Tests.Unit.TagStrategiesTests
         [Test]
         public void GetEnvironmentTag_WhenValueDoesNotExistInSystemEnvironmentVariables_ReturnsNull()
         {
-            var env = new Mock<IEnvironment>();
+            var env = new Mock<ISystemEnvironment>();
             env.Setup(ctx => ctx.GetEnvironmentVariable("Konfiggy", EnvironmentVariableTarget.User)).Returns(() => null);
             env.Setup(ctx => ctx.GetEnvironmentVariable("Konfiggy", EnvironmentVariableTarget.Machine)).Returns(() => null);
 

@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using Konfiggy.Exceptions;
+using Konfiggy.Helpers;
 using Konfiggy.TagStrategies;
 
 namespace Konfiggy
@@ -18,7 +19,7 @@ namespace Konfiggy
         static Konfiggy()
         {
             ConfigurationKeeper = new ConfigurationKeeper();
-            EnvironmentTagStrategy = new GlobalConfigFileVariableTagStrategy();
+            EnvironmentTagStrategy = new ConfigFileGlobalVariableTagStrategy();
         }
 
         public static void Initialize(IEnvironmentTagStrategy environmentTagStrategy, IConfigurationKeeper configurationKeeper)
@@ -40,7 +41,7 @@ namespace Konfiggy
             if (ConfigurationKeeper == null)
                 throw new KonfiggyConfigurationKeeperNotSetException("Please provide an implementation of IConfiguraitonKeeper through calling the Konfiggy.Initialize() method");
 
-            var appSettings = ConfigurationKeeper.GetSection("appSettings");
+            var appSettings = (NameValueCollection) ConfigurationKeeper.GetSection("appSettings");
 
             var environmentTag = EnvironmentTagStrategy.GetEnvironmentTag();
 

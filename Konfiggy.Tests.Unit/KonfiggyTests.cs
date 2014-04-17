@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 using Konfiggy.Exceptions;
+using Konfiggy.Helpers;
 using Konfiggy.TagStrategies;
 using Moq;
 using NUnit.Framework;
@@ -73,7 +74,7 @@ namespace Konfiggy.Tests.Unit
         public void GeneralBehavior_WhenNoTagStrategyIsGivenThroughInitialize_UsesDefaultTagStrategy()
         {
             Assert.IsNotNull(Konfiggy.EnvironmentTagStrategy);
-            Assert.IsInstanceOf<GlobalConfigFileVariableTagStrategy>(Konfiggy.EnvironmentTagStrategy);
+            Assert.IsInstanceOf<ConfigFileGlobalVariableTagStrategy>(Konfiggy.EnvironmentTagStrategy);
         }
 
         [Test]

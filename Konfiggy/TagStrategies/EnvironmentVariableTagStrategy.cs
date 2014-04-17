@@ -1,12 +1,13 @@
 ﻿using System;
 using Konfiggy.Exceptions;
+using Konfiggy.Helpers;
 
 namespace Konfiggy.TagStrategies
 {
     public class EnvironmentVariableTagStrategy : IEnvironmentTagStrategy
     {
         public string KonfiggyIdentifier { get; set; }
-        public IEnvironment SystemEnvironment { get; set; }
+        public ISystemEnvironment SystemEnvironment { get; set; }
 
         public EnvironmentVariableTagStrategy()
         {
@@ -16,7 +17,7 @@ namespace Konfiggy.TagStrategies
 
         public string GetEnvironmentTag()
         {
-            if (SystemEnvironment == null) throw new KonfiggyEnvironmentNotSetException("Please provide an implementation of IEnvironment before calling GetEnvironmentTag()");
+            if (SystemEnvironment == null) throw new KonfiggyEnvironmentNotSetException("Please provide an implementation of ISystemEnvironment before calling GetEnvironmentTag()");
             if (String.IsNullOrEmpty(KonfiggyIdentifier)) throw new KonfiggyIdentifierNotSetException("Please provide a value for the KonfiggyIdentifier property before calling GetEnvironmentTag()");
 
             string value = TryGetValueFromUserVariables();
