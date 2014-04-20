@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="KonfiggyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TagStrategiesTests\CodeTagStrategyTests.cs" />
     <Compile Include="TagStrategiesTests\EnvironmentVariableTagStrategyTests.cs" />
     <Compile Include="TagStrategiesTests\ConfigFileGlobalVariableTagStrategyTests.cs" />
   </ItemGroup>

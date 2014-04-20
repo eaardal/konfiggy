@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Konfiggy.Exceptions
 {
-    public class KonfiggyNoTagStrategiesSetException : Exception
+    public class KonfiggyTagStrategyNotSetException : Exception
     {
-        public KonfiggyNoTagStrategiesSetException(string msg) : base(msg)
+        public KonfiggyTagStrategyNotSetException(string msg) : base(msg)
         {
             
         }

@@ -25,25 +25,9 @@ namespace Konfiggy.Config
         }
 
         [ConfigurationProperty("environmentTag")]
-        public IEnvironmentTagElement EnvironmentTag
+        public EnvironmentTagElement EnvironmentTag
         {
-            get { return this["environmentTag"] as IEnvironmentTagElement; }
+            get { return this["environmentTag"] as EnvironmentTagElement; }
         }
     }
-
-    /// <summary>
-    /// Represents a EnvironmentTag element in a Konfiggy configuration section in the app.config
-    /// </summary>
-    public class EnvironmentTagElement : ConfigurationElement, IEnvironmentTagElement
-    {
-        /// <summary>
-        /// The environment tag value
-        /// </summary>
-        [ConfigurationProperty("value", IsRequired = true, IsKey = true)]
-        public string Value
-        {
-            get { return this["value"] as string; }
-        }
-    }
-
 }

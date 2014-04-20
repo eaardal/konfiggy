@@ -2,6 +2,6 @@
 {
     public interface IConfigSection
     {
-        IEnvironmentTagElement EnvironmentTag { get; }
+        EnvironmentTagElement EnvironmentTag { get; }
     }
 }

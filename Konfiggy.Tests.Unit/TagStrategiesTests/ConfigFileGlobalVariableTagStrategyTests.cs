@@ -21,15 +21,15 @@ namespace Konfiggy.Tests.Unit.TagStrategiesTests
         [Test]
         public void GetEnvironmentTag_WhenConfigSectionIsNull_UsesDefault()
         {
-            _tagStrategy.ConfigSection = null;
-
             var configSection = new Mock<IConfigSection>();
             configSection.Setup(ctx => ctx.EnvironmentTag.Value).Returns("Local");
 
             var configKeeper = new Mock<IConfigurationKeeper>();
             configKeeper.Setup(ctx => ctx.GetSection("konfiggy")).Returns(configSection.Object);
 
+            _tagStrategy.ConfigSection = null;
             ConfigSection.ConfigurationKeeper = configKeeper.Object;
+
             _tagStrategy.GetEnvironmentTag();
 
             Assert.IsNotNull(_tagStrategy.ConfigSection);

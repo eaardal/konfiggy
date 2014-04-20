@@ -12,44 +12,10 @@ namespace Konfiggy.Tests.Unit
     public class KonfiggyTests
     {
         [Test]
-        public void Initialize_WhenCalledWithNoTagStrategy_ThrowsException()
-        {
-            var configKeeper = new Mock<IConfigurationKeeper>().Object;
-            Assert.Throws<ArgumentNullException>(() => Konfiggy.Initialize(null, configKeeper));
-        }
-        
-        [Test]
-        public void Initialize_WhenCalledWithNoConfigurationKeeper_ThrowsException()
-        {
-            var tagStrat = new Mock<IEnvironmentTagStrategy>().Object;
-            Assert.Throws<ArgumentNullException>(() => Konfiggy.Initialize(tagStrat, null));
-        }
-
-        [Test]
-        public void Initialize_WhenTagStrategyGiven_SetsInstanceGivenAsCurrentKonfiggyTagStrategy()
-        {
-            var tagStrat = new Mock<IEnvironmentTagStrategy>().Object;
-            var configKeeper = new Mock<IConfigurationKeeper>().Object;
-            Konfiggy.Initialize(tagStrat, configKeeper);
-
-            Assert.AreSame(tagStrat, Konfiggy.EnvironmentTagStrategy);
-        }
-
-        [Test]
-        public void Initialize_WhenConfigurationKeeperIsGiven_SetsInstanceGivenAsCurrentConfigurationKeeper()
-        {
-            var tagStrat = new Mock<IEnvironmentTagStrategy>().Object;
-            var configKeeper = new Mock<IConfigurationKeeper>().Object;
-            Konfiggy.Initialize(tagStrat, configKeeper);
-
-            Assert.AreSame(configKeeper, Konfiggy.ConfigurationKeeper);
-        }
-
-        [Test]
         public void GetAppSettings_WhenNoTagStrategyIsSet_ThrowsException()
         {
             Konfiggy.EnvironmentTagStrategy = null;
-            Assert.Throws<KonfiggyNoTagStrategiesSetException>(() => Konfiggy.GetAppSetting("somevalue"));
+            Assert.Throws<KonfiggyTagStrategyNotSetException>(() => Konfiggy.GetAppSetting("somevalue"));
         }
 
         [Test]
@@ -86,7 +52,8 @@ namespace Konfiggy.Tests.Unit
             var config = new Mock<IConfigurationKeeper>();
             config.Setup(ctx => ctx.GetSection("appSettings")).Returns(GetFakeConfigValues());
 
-            Konfiggy.Initialize(tagStrat.Object, config.Object);
+            Konfiggy.EnvironmentTagStrategy = tagStrat.Object;
+            Konfiggy.ConfigurationKeeper = config.Object;
 
             string result = Konfiggy.GetAppSetting("TestValue");
 
