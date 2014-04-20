@@ -59,9 +59,13 @@
     <Compile Include="Exceptions\KonfiggyEnvironmentNotSetException.cs" />
     <Compile Include="Exceptions\KonfiggyTagStrategyNotSet.cs" />
     <Compile Include="Helpers\ConfigurationKeeper.cs" />
+    <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Helpers\IConfigurationKeeper.cs" />
     <Compile Include="Helpers\ISystemEnvironment.cs" />
     <Compile Include="Helpers\SystemEnvironment.cs" />
+    <Compile Include="KeyValueRetrievalStrategies\AppSettingsRetrievalStrategy.cs" />
+    <Compile Include="KeyValueRetrievalStrategies\ConnectionStringsRetrievalStrategy.cs" />
+    <Compile Include="KeyValueRetrievalStrategies\IKeyValueRetrievalStrategy.cs" />
     <Compile Include="Konfiggy.cs" />
     <Compile Include="Exceptions\KonfiggyEnvironmentTagNotFoundException.cs" />
     <Compile Include="Exceptions\KonfiggyKeyNotFoundException.cs" />

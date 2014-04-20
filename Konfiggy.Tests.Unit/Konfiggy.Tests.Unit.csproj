@@ -55,6 +55,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="KeyValueRetrievalStrategiesTests\AppSettingsRetrievalStrategyTests.cs" />
+    <Compile Include="KeyValueRetrievalStrategiesTests\ConnectionStringsRetrievalStrategyTests.cs" />
     <Compile Include="KonfiggyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TagStrategiesTests\CodeTagStrategyTests.cs" />
