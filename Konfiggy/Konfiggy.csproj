@@ -54,15 +54,19 @@
     <Compile Include="Config\IConfigSection.cs" />
     <Compile Include="Config\IEnvironmentTagElement.cs" />
     <Compile Include="Exceptions\KonfiggyConfigSectionNotSetException.cs" />
+    <Compile Include="Exceptions\KonfiggyFilePathNotSetException.cs" />
     <Compile Include="Exceptions\KonfiggyIdentifierNotSetException.cs" />
     <Compile Include="Exceptions\KonfiggyConfigurationKeeperNotSetException.cs" />
     <Compile Include="Exceptions\KonfiggyEnvironmentNotSetException.cs" />
     <Compile Include="Exceptions\KonfiggyTagStrategyNotSet.cs" />
     <Compile Include="Helpers\ConfigurationKeeper.cs" />
     <Compile Include="Helpers\Converters.cs" />
+    <Compile Include="Helpers\FileHelpers.cs" />
+    <Compile Include="Helpers\TextFileHelpers.cs" />
     <Compile Include="Helpers\IConfigurationKeeper.cs" />
     <Compile Include="Helpers\ISystemEnvironment.cs" />
     <Compile Include="Helpers\SystemEnvironment.cs" />
+    <Compile Include="Helpers\XmlFileHelpers.cs" />
     <Compile Include="KeyValueRetrievalStrategies\AppSettingsRetrievalStrategy.cs" />
     <Compile Include="KeyValueRetrievalStrategies\ConnectionStringsRetrievalStrategy.cs" />
     <Compile Include="KeyValueRetrievalStrategies\IKeyValueRetrievalStrategy.cs" />
@@ -74,7 +78,10 @@
     <Compile Include="TagStrategies\ConditionalCompilationTagStrategy.cs" />
     <Compile Include="TagStrategies\EnvironmentVariableTagStrategy.cs" />
     <Compile Include="TagStrategies\ConfigFileGlobalVariableTagStrategy.cs" />
+    <Compile Include="TagStrategies\FileTagStrategy.cs" />
+    <Compile Include="TagStrategies\TextFileTagStrategy.cs" />
     <Compile Include="TagStrategies\IEnvironmentTagStrategy.cs" />
+    <Compile Include="TagStrategies\KonfiggyXmlFileTagStrategy.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

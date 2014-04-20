@@ -55,6 +55,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Helpers\XmlFileHelpersTests.cs" />
     <Compile Include="KeyValueRetrievalStrategiesTests\AppSettingsRetrievalStrategyTests.cs" />
     <Compile Include="KeyValueRetrievalStrategiesTests\ConnectionStringsRetrievalStrategyTests.cs" />
     <Compile Include="KonfiggyTests.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="TagStrategiesTests\CodeTagStrategyTests.cs" />
     <Compile Include="TagStrategiesTests\EnvironmentVariableTagStrategyTests.cs" />
     <Compile Include="TagStrategiesTests\ConfigFileGlobalVariableTagStrategyTests.cs" />
+    <Compile Include="TagStrategiesTests\FileTagStrategyTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

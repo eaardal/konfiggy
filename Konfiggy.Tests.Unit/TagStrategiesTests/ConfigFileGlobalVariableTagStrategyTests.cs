@@ -50,13 +50,6 @@ namespace Konfiggy.Tests.Unit.TagStrategiesTests
             Assert.AreEqual("Local", value);
         }
 
-        private XDocument GetFakeKonfiggyConfigSection()
-        {
-            var doc = new XDocument(new XElement("konfiggy",
-                new XElement("environmentTag",
-                    new XAttribute("value", "Local"))));
-
-            return doc;
-        }
+       
     }
 }

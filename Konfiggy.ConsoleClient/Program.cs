@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection.Emit;
 using Konfiggy.Helpers;
 using Konfiggy.TagStrategies;
 
@@ -8,8 +9,16 @@ namespace Konfiggy.ConsoleClient
     {
         static void Main(string[] args)
         {
-            string myFilePath = Konfiggy.GetConnectionString("MyDb");
-            Console.WriteLine(myFilePath);
+            string xmlFilePath = @"C:\SourceControl\Konfiggy\FileTest\konfiggy.xml";
+            string txtFilePath = @"C:\SourceControl\Konfiggy\FileTest\konfiggy.txt";
+
+            var tagStrat = new TextFileTagStrategy {FilePath = txtFilePath};
+            var tag = tagStrat.GetEnvironmentTag();
+
+            Console.WriteLine(tag);
+
+            TextFileHelpers.ModifyEnvironmentTag(txtFilePath, "Prod");
+            Console.WriteLine(tagStrat.GetEnvironmentTag());
 
             Console.ReadLine();
         }
