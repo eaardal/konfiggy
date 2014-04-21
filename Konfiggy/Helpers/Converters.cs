@@ -5,7 +5,7 @@ using System.Configuration;
 
 namespace Konfiggy.Helpers
 {
-    static class Converters
+    public static class Converters
     {
         public static IDictionary<string, string> ConvertToDictionary(ConnectionStringSettingsCollection connectionStrings)
         {

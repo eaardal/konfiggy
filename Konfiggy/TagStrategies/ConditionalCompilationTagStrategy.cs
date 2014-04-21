@@ -1,11 +1,6 @@
-﻿#define Debug
-
-using System;
-using System.Diagnostics;
-
-namespace Konfiggy.TagStrategies
+﻿namespace Konfiggy.TagStrategies
 {
-    public class ConditionalCompilationTagStrategy : IEnvironmentTagStrategy
+    class ConditionalCompilationTagStrategy : IEnvironmentTagStrategy
     {
         public string GetEnvironmentTag()
         {

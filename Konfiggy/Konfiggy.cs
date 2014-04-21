@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Konfiggy.Exceptions;
 using Konfiggy.Helpers;
 using Konfiggy.KeyValueRetrievalStrategies;
+using Konfiggy.Settings;
 using Konfiggy.TagStrategies;
 
 namespace Konfiggy
@@ -58,10 +59,11 @@ namespace Konfiggy
         }
 
         /// <summary>
-        /// Get the value in a key-value collection matching the key given.
+        /// Get the value in a key-value collection matching the key given. Please provide the functionality for retrieving the key-value collection.  
         /// </summary>
         /// <param name="key">The key to get the value for.</param>
-        /// <param name="keyValueRetrievalStrategy">The custom implementation to use for retrieving the key-value collection.</param>
+        /// <param name="keyValueRetrievalStrategy">The custom implementation to use for retrieving the key-value collection. 
+        /// The current IConfigurationKeeper instance will be given as input parameter. </param>
         /// <returns>Returns the value of the key-value entry matching the key given and the current Environment Tag.</returns>
         public static string GetCustom(string key, IKeyValueRetrievalStrategy keyValueRetrievalStrategy)
         {

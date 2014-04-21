@@ -40,7 +40,7 @@ namespace Konfiggy.Tests.Unit
         public void GeneralBehavior_WhenNoTagStrategyIsGivenThroughInitialize_UsesDefaultTagStrategy()
         {
             Assert.IsNotNull(Konfiggy.EnvironmentTagStrategy);
-            Assert.IsInstanceOf<ConfigFileGlobalVariableTagStrategy>(Konfiggy.EnvironmentTagStrategy);
+            Assert.IsInstanceOf<ConfigFileTagStrategy>(Konfiggy.EnvironmentTagStrategy);
         }
 
         [Test]

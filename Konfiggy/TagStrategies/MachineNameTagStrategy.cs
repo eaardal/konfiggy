@@ -5,20 +5,20 @@ using Konfiggy.Helpers;
 
 namespace Konfiggy.TagStrategies
 {
-    public class ServerNameTagStrategy : IEnvironmentTagStrategy
+    public class MachineNameTagStrategy : IEnvironmentTagStrategy
     {
-        public IDictionary<string, string> ServerNamesMap { get; set; }
+        public IDictionary<string, string> MachineNamesMap { get; set; }
         public ISystemEnvironment SystemEnvironment { get; set; }
 
-        public ServerNameTagStrategy()
+        public MachineNameTagStrategy()
         {
             SystemEnvironment = new SystemEnvironment();
         }
 
         public string GetEnvironmentTag()
         {
-            if (ServerNamesMap == null || !ServerNamesMap.Any())
-                throw new KonfiggyServerNamesMapNotSetException("Please provide one or more entries in the ServerNamesMap property before calling GetEnvironmentTag()");
+            if (MachineNamesMap == null || !MachineNamesMap.Any())
+                throw new KonfiggyServerNamesMapNotSetException("Please provide one or more entries in the MachineNamesMap property before calling GetEnvironmentTag()");
 
             if (SystemEnvironment == null)
                 throw new KonfiggyEnvironmentNotSetException("Please provde an implementation of ISystemEnvironment to the SystemEnvironment property before calling GetEnvironmentTag()");
@@ -31,7 +31,7 @@ namespace Konfiggy.TagStrategies
 
         private string FindEnvironmentTagInMap(string currentMachineName)
         {
-            return ServerNamesMap.FirstOrDefault(kvp => kvp.Key.ToLower().Equals(currentMachineName.ToLower())).Value;
+            return MachineNamesMap.FirstOrDefault(kvp => kvp.Key.ToLower().Equals(currentMachineName.ToLower())).Value;
         }
 
         private string GetNameOfCurrentMachine()

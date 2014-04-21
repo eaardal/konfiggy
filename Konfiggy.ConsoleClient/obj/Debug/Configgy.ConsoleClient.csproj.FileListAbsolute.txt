@@ -1,9 +1,0 @@
-C:\SourceControl\Configgy\Configgy\bin\Debug\Configgy.ConsoleClient.exe.config
-C:\SourceControl\Configgy\Configgy.ConsoleClient\bin\Debug\Configgy.ConsoleClient.exe.config
-C:\SourceControl\Configgy\Configgy.ConsoleClient\bin\Debug\Configgy.ConsoleClient.exe
-C:\SourceControl\Configgy\Configgy.ConsoleClient\bin\Debug\Configgy.ConsoleClient.pdb
-C:\SourceControl\Configgy\Configgy.ConsoleClient\bin\Debug\Configgy.dll
-C:\SourceControl\Configgy\Configgy.ConsoleClient\bin\Debug\Configgy.pdb
-C:\SourceControl\Configgy\Configgy.ConsoleClient\obj\Debug\Configgy.ConsoleClient.csprojResolveAssemblyReference.cache
-C:\SourceControl\Configgy\Configgy.ConsoleClient\obj\Debug\Configgy.ConsoleClient.exe
-C:\SourceControl\Configgy\Configgy.ConsoleClient\obj\Debug\Configgy.ConsoleClient.pdb

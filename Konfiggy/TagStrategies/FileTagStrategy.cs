@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Konfiggy.Exceptions;
 using Konfiggy.Helpers;
+using Konfiggy.Settings;
 
 namespace Konfiggy.TagStrategies
 {

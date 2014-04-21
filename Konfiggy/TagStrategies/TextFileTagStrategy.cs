@@ -1,4 +1,5 @@
 ﻿using Konfiggy.Helpers;
+using Konfiggy.Settings;
 
 namespace Konfiggy.TagStrategies
 {

@@ -1,8 +1,0 @@
-C:\SourceControl\Konfiggy\Konfiggy.ConsoleClient\bin\Release\Konfiggy.ConsoleClient.exe.config
-C:\SourceControl\Konfiggy\Konfiggy.ConsoleClient\bin\Release\Konfiggy.ConsoleClient.exe
-C:\SourceControl\Konfiggy\Konfiggy.ConsoleClient\bin\Release\Konfiggy.ConsoleClient.pdb
-C:\SourceControl\Konfiggy\Konfiggy.ConsoleClient\bin\Release\Konfiggy.dll
-C:\SourceControl\Konfiggy\Konfiggy.ConsoleClient\bin\Release\Konfiggy.pdb
-C:\SourceControl\Konfiggy\Konfiggy.ConsoleClient\obj\Release\Konfiggy.ConsoleClient.csprojResolveAssemblyReference.cache
-C:\SourceControl\Konfiggy\Konfiggy.ConsoleClient\obj\Release\Konfiggy.ConsoleClient.exe
-C:\SourceControl\Konfiggy\Konfiggy.ConsoleClient\obj\Release\Konfiggy.ConsoleClient.pdb

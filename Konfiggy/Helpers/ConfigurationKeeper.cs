@@ -11,7 +11,7 @@ namespace Konfiggy.Helpers
         /// Calls into the GetSection(string name) method of <see cref="System.Configuration.ConfigurationManager"/>
         /// </summary>
         /// <param name="name">The name of the section to retrieve</param>
-        /// <returns>Returns the Name-Value collection representing the config section</returns>
+        /// <returns>Returns the configuraiton section matching the name given.</returns>
         public object GetSection(string name)
         {
             return ConfigurationManager.GetSection(name);
