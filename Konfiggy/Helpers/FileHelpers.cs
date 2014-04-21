@@ -2,12 +2,13 @@
 using System.IO;
 using System.Security.AccessControl;
 using System.Text;
+using System.Threading;
 
 namespace Konfiggy.Helpers
 {
     public static class FileHelpers
     {
-        public static FileInfo GetFile(string filepath)
+        public static FileInfo CreateFileIfNotExists(string filepath)
         {
             var file = new FileInfo(filepath);
             if (!file.Exists)
@@ -19,20 +20,34 @@ namespace Konfiggy.Helpers
 
         public static string GetFileContent(string filepath)
         {
-            var file = GetFile(filepath);
-
-            var text = String.Empty;
-            using (var stream = file.OpenText())
+            while (IsFileLocked(filepath))
             {
-                text = stream.ReadToEnd();
+                Thread.Sleep(20);
             }
-            return text;
+
+            return File.ReadAllText(filepath);
+        }
+
+        private static bool IsFileLocked(string filepath)
+        {
+            try
+            {
+                using (File.Open(filepath, FileMode.Open))
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                return true;
+            }
         }
 
         public static void CreateFile(string filepath)
         {
             EnsurePathExists(filepath);
-            File.Create(filepath);
+            var fileStream = File.Create(filepath);
+            fileStream.Dispose(); //Dispose unlocks the file on disk.
         }
 
         public static void EnsurePathExists(string filepath)
@@ -43,7 +58,7 @@ namespace Konfiggy.Helpers
                 Directory.CreateDirectory(pathWithoutFile);
             }
         }
-
+        
         public static void CreateFileWithContent(string filepath, string content)
         {
             EnsurePathExists(filepath);

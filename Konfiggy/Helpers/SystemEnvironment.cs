@@ -8,5 +8,10 @@ namespace Konfiggy.Helpers
         {
             return Environment.GetEnvironmentVariable(variable, target);
         }
+
+        public string GetMachineName()
+        {
+            return Environment.MachineName;
+        }
     }
 }

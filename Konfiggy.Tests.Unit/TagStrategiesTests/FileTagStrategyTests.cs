@@ -15,10 +15,10 @@ namespace Konfiggy.Tests.Unit.TagStrategiesTests
         [Test]
         public void GetEnvironmentTag_WhenFilePathIsNullOrEmpty_ThrowsException()
         {
-            var tagStrat = new KonfiggyXmlFileTagStrategy();
+            var tagStrat = new TextFileTagStrategy();
             Assert.Throws<KonfiggyFilePathNotSetException>(() => tagStrat.GetEnvironmentTag());
 
-            tagStrat.FilePath = String.Empty;
+            //tagStrat.FilePath = String.Empty;
             Assert.Throws<KonfiggyFilePathNotSetException>(() => tagStrat.GetEnvironmentTag());
         }
     }

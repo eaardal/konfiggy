@@ -64,6 +64,7 @@
     <Compile Include="TagStrategiesTests\EnvironmentVariableTagStrategyTests.cs" />
     <Compile Include="TagStrategiesTests\ConfigFileGlobalVariableTagStrategyTests.cs" />
     <Compile Include="TagStrategiesTests\FileTagStrategyTests.cs" />
+    <Compile Include="TagStrategiesTests\ServerNameTagStrategyTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

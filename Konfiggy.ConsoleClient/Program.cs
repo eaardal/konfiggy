@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using System.Reflection.Emit;
+using System.Text.RegularExpressions;
 using Konfiggy.Helpers;
 using Konfiggy.TagStrategies;
 
@@ -9,16 +12,20 @@ namespace Konfiggy.ConsoleClient
     {
         static void Main(string[] args)
         {
-            string xmlFilePath = @"C:\SourceControl\Konfiggy\FileTest\konfiggy.xml";
-            string txtFilePath = @"C:\SourceControl\Konfiggy\FileTest\konfiggy.txt";
+            var strategy = new ServerNameTagStrategy
+            {
+                ServerNamesMap = new Dictionary<string, string>
+                {
+                    {"server1", "Local"},
+                    {"server2", "Dev"},
+                    {"eaardal-bouvet", "QA"},
+                    {"server4", "Prod"},
+                }
+            };
 
-            var tagStrat = new TextFileTagStrategy {FilePath = txtFilePath};
-            var tag = tagStrat.GetEnvironmentTag();
+            var tag = strategy.GetEnvironmentTag();
 
             Console.WriteLine(tag);
-
-            TextFileHelpers.ModifyEnvironmentTag(txtFilePath, "Prod");
-            Console.WriteLine(tagStrat.GetEnvironmentTag());
 
             Console.ReadLine();
         }
