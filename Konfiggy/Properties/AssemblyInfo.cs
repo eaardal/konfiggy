@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Konfiggy")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A tiny helper framework for providing environment-based app/web.config configurations")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Konfiggy")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCopyright("Copyright ©  2014 Eirik Årdal")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

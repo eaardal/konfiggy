@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Konfiggy.Helpers;
 using Konfiggy.KeyValueRetrievalStrategies;
 using Konfiggy.Settings;
 using Konfiggy.TagStrategies;
@@ -16,7 +12,7 @@ namespace Konfiggy.ClientTestApp
         {
             IKonfiggy konfiggy = new Konfiggy();
             konfiggy.ConfigurationKeeper = new ConfigurationKeeper();
-            konfiggy.EnvironmentTagStrategy = new ConfigFileTagStrategy();
+            //konfiggy.EnvironmentTagStrategy = new ConfigFileTagStrategy();
             //konfiggy.EnvironmentTagStrategy = new CodeTagStrategy("QA");
             //konfiggy.EnvironmentTagStrategy = new EnvironmentVariableTagStrategy();
             //konfiggy.EnvironmentTagStrategy = new MachineNameTagStrategy(CreateMachineNamesMap());
