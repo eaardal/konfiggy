@@ -1,5 +1,0 @@
-C:\SourceControl\Konfiggy\Konfiggy\bin\Release\Konfiggy.dll
-C:\SourceControl\Konfiggy\Konfiggy\bin\Release\Konfiggy.pdb
-C:\SourceControl\Konfiggy\Konfiggy\obj\Release\Konfiggy.dll
-C:\SourceControl\Konfiggy\Konfiggy\obj\Release\Konfiggy.pdb
-C:\SourceControl\Konfiggy\Konfiggy\obj\Release\Konfiggy.csprojResolveAssemblyReference.cache
