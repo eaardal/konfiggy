@@ -81,8 +81,8 @@
     <Compile Include="Settings\KonfiggyFileType.cs" />
     <Compile Include="TagStrategies\CodeTagStrategy.cs" />
     <Compile Include="TagStrategies\ConditionalCompilationTagStrategy.cs" />
+    <Compile Include="TagStrategies\ConfigFileTagStrategy.cs" />
     <Compile Include="TagStrategies\EnvironmentVariableTagStrategy.cs" />
-    <Compile Include="TagStrategies\ConfigFileGlobalVariableTagStrategy.cs" />
     <Compile Include="TagStrategies\FileTagStrategy.cs" />
     <Compile Include="TagStrategies\MachineNameTagStrategy.cs" />
     <Compile Include="TagStrategies\TextFileTagStrategy.cs" />

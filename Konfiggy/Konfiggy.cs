@@ -33,7 +33,7 @@ namespace Konfiggy
         static Konfiggy()
         {
             ConfigurationKeeper = new ConfigurationKeeper();
-            EnvironmentTagStrategy = new ConfigFileGlobalVariableTagStrategy();
+            EnvironmentTagStrategy = new ConfigFileTagStrategy();
         }
 
         /// <summary>

@@ -57,14 +57,13 @@
   <ItemGroup>
     <Compile Include="ConfigTests\ConfigSectionTests.cs" />
     <Compile Include="HelpersTests\ConvertersTests.cs" />
-    <Compile Include="HelpersTests\XmlFileHelpersTests.cs" />
     <Compile Include="KeyValueRetrievalStrategiesTests\AppSettingsRetrievalStrategyTests.cs" />
     <Compile Include="KeyValueRetrievalStrategiesTests\ConnectionStringsRetrievalStrategyTests.cs" />
     <Compile Include="KonfiggyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TagStrategiesTests\CodeTagStrategyTests.cs" />
+    <Compile Include="TagStrategiesTests\ConfigFileTagStrategyTests.cs" />
     <Compile Include="TagStrategiesTests\EnvironmentVariableTagStrategyTests.cs" />
-    <Compile Include="TagStrategiesTests\ConfigFileGlobalVariableTagStrategyTests.cs" />
     <Compile Include="TagStrategiesTests\FileTagStrategyTests.cs" />
     <Compile Include="TagStrategiesTests\MachineNameTagStrategyTests.cs" />
   </ItemGroup>
