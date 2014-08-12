@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Konfiggy.Helpers
+namespace Konfiggy
 {
     public interface ISystemEnvironment
     {

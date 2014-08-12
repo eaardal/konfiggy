@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Konfiggy.Exceptions;
 using Konfiggy.Helpers;
@@ -10,8 +11,11 @@ namespace Konfiggy.TagStrategies
         public IDictionary<string, string> MachineNamesMap { get; set; }
         public ISystemEnvironment SystemEnvironment { get; set; }
 
-        public MachineNameTagStrategy()
+        public MachineNameTagStrategy(IDictionary<string, string> machineNamesMap)
         {
+            if (machineNamesMap == null) throw new ArgumentNullException("machineNamesMap");
+            MachineNamesMap = machineNamesMap;
+
             SystemEnvironment = new SystemEnvironment();
         }
 

@@ -19,7 +19,7 @@ namespace Konfiggy.Tests.Unit.TagStrategiesTests
         [SetUp]
         public void SetUp()
         {
-            _tagStrategy = new MachineNameTagStrategy {MachineNamesMap = GetFakeServerNamesMap()};
+            _tagStrategy = new MachineNameTagStrategy(GetFakeServerNamesMap());
         }
 
         [Test]

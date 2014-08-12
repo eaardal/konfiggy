@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>a3b19c1a-b494-41fb-adbf-aca6897d532c</ProjectGuid>
+    <ProjectGuid>{BBEE0EF9-EA95-4A0B-81B7-FAF0CFFC4B0D}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Konfiggy.ClientTestApp</RootNamespace>
@@ -46,6 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Konfiggy\Konfiggy.csproj">
+      <Project>{4ab855ed-7382-435d-bde2-bf625411bece}</Project>
+      <Name>Konfiggy</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

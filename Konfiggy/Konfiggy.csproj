@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationKeeper.cs" />
     <Compile Include="Config\ConfigSection.cs" />
     <Compile Include="Config\EnvironmentTagElement.cs" />
     <Compile Include="Config\IConfigSection.cs" />
@@ -61,14 +62,13 @@
     <Compile Include="Exceptions\KonfiggyEnvironmentNotSetException.cs" />
     <Compile Include="Exceptions\KonfiggyServerNamesMapNotSetException.cs" />
     <Compile Include="Exceptions\KonfiggyTagStrategyNotSet.cs" />
-    <Compile Include="Helpers\ConfigurationKeeper.cs" />
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Helpers\FileHelpers.cs" />
     <Compile Include="Helpers\TextFileHelpers.cs" />
-    <Compile Include="Helpers\IConfigurationKeeper.cs" />
-    <Compile Include="Helpers\ISystemEnvironment.cs" />
-    <Compile Include="Helpers\SystemEnvironment.cs" />
     <Compile Include="Helpers\XmlFileHelpers.cs" />
+    <Compile Include="IConfigurationKeeper.cs" />
+    <Compile Include="IKonfiggy.cs" />
+    <Compile Include="ISystemEnvironment.cs" />
     <Compile Include="KeyValueRetrievalStrategies\AppSettingsRetrievalStrategy.cs" />
     <Compile Include="KeyValueRetrievalStrategies\ConnectionStringsRetrievalStrategy.cs" />
     <Compile Include="KeyValueRetrievalStrategies\IKeyValueRetrievalStrategy.cs" />
@@ -79,8 +79,8 @@
     <Compile Include="Settings\DefaultFileSettings.cs" />
     <Compile Include="Settings\IFileSettings.cs" />
     <Compile Include="Settings\KonfiggyFileType.cs" />
+    <Compile Include="SystemEnvironment.cs" />
     <Compile Include="TagStrategies\CodeTagStrategy.cs" />
-    <Compile Include="TagStrategies\ConditionalCompilationTagStrategy.cs" />
     <Compile Include="TagStrategies\ConfigFileTagStrategy.cs" />
     <Compile Include="TagStrategies\EnvironmentVariableTagStrategy.cs" />
     <Compile Include="TagStrategies\FileTagStrategy.cs" />

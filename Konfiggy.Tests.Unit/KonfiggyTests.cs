@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.Configuration;
 using Konfiggy.Exceptions;
 using Konfiggy.Helpers;
 using Konfiggy.TagStrategies;
@@ -11,11 +12,19 @@ namespace Konfiggy.Tests.Unit
     [TestFixture]
     public class KonfiggyTests
     {
+        private IKonfiggy _konfiggy;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _konfiggy = new Konfiggy();
+        }
+
         [Test]
         public void GetAppSettings_WhenNoTagStrategyIsSet_ThrowsException()
         {
-            Konfiggy.EnvironmentTagStrategy = null;
-            Assert.Throws<KonfiggyTagStrategyNotSetException>(() => Konfiggy.GetAppSetting("somevalue"));
+            _konfiggy.EnvironmentTagStrategy = null;
+            Assert.Throws<KonfiggyTagStrategyNotSetException>(() => _konfiggy.GetAppSetting("somevalue"));
         }
 
         [Test]
@@ -23,24 +32,24 @@ namespace Konfiggy.Tests.Unit
         {
             var tagStrat = new Mock<IEnvironmentTagStrategy>();
 
-            Konfiggy.EnvironmentTagStrategy = tagStrat.Object;
-            Konfiggy.ConfigurationKeeper = null;
+            _konfiggy.EnvironmentTagStrategy = tagStrat.Object;
+            _konfiggy.ConfigurationKeeper = null;
 
-            Assert.Throws<KonfiggyConfigurationKeeperNotSetException>(() => Konfiggy.GetAppSetting("somevalue"));
+            Assert.Throws<KonfiggyConfigurationKeeperNotSetException>(() => _konfiggy.GetAppSetting("somevalue"));
         }
 
         [Test]
         public void GeneralBehavior_WhenNoConfigurationKeeperIsGivenThroughInitialize_UsesDefaultConfigurationKeeper()
         {
-            Assert.IsNotNull(Konfiggy.ConfigurationKeeper);
-            Assert.IsInstanceOf<ConfigurationKeeper>(Konfiggy.ConfigurationKeeper);
+            Assert.IsNotNull(_konfiggy.ConfigurationKeeper);
+            Assert.IsInstanceOf<ConfigurationKeeper>(_konfiggy.ConfigurationKeeper);
         }
 
         [Test]
         public void GeneralBehavior_WhenNoTagStrategyIsGivenThroughInitialize_UsesDefaultTagStrategy()
         {
-            Assert.IsNotNull(Konfiggy.EnvironmentTagStrategy);
-            Assert.IsInstanceOf<ConfigFileTagStrategy>(Konfiggy.EnvironmentTagStrategy);
+            Assert.IsNotNull(_konfiggy.EnvironmentTagStrategy);
+            Assert.IsInstanceOf<ConfigFileTagStrategy>(_konfiggy.EnvironmentTagStrategy);
         }
 
         [Test]
@@ -50,24 +59,49 @@ namespace Konfiggy.Tests.Unit
             tagStrat.Setup(ctx => ctx.GetEnvironmentTag()).Returns("Local");
 
             var config = new Mock<IConfigurationKeeper>();
-            config.Setup(ctx => ctx.GetSection("appSettings")).Returns(GetFakeConfigValues());
+            config.Setup(ctx => ctx.GetSection("appSettings")).Returns(GetFakeAppSettings());
 
-            Konfiggy.EnvironmentTagStrategy = tagStrat.Object;
-            Konfiggy.ConfigurationKeeper = config.Object;
+            _konfiggy.EnvironmentTagStrategy = tagStrat.Object;
+            _konfiggy.ConfigurationKeeper = config.Object;
 
-            string result = Konfiggy.GetAppSetting("TestValue");
+            string result = _konfiggy.GetAppSetting("TestValue");
 
             Assert.AreEqual("LocalValue", result);
         }
 
         [Test]
-        public void GetAppSettings_WhenKeyIsNullOrEmpty_ThrowsException()
+        public void WhenKeyDoesNotExistInKeyValueStore_ThrowsKonfiggyKeyNotFoundException()
         {
-            Assert.Throws<ArgumentNullException>(() => Konfiggy.GetAppSetting(null));
-            Assert.Throws<ArgumentNullException>(() => Konfiggy.GetAppSetting(String.Empty));
+            var tagStrat = new Mock<IEnvironmentTagStrategy>();
+            tagStrat.Setup(ctx => ctx.GetEnvironmentTag()).Returns("Local");
+
+            var config = new Mock<IConfigurationKeeper>();
+            config.Setup(ctx => ctx.GetSection("connectionStrings")).Returns(GetFakeConnectionStrings);
+
+            _konfiggy.EnvironmentTagStrategy = tagStrat.Object;
+            _konfiggy.ConfigurationKeeper = config.Object;
+            
+            Assert.Throws<KonfiggyKeyNotFoundException>(() => _konfiggy.GetConnectionString("NonExistingKey"));
         }
 
-        private NameValueCollection GetFakeConfigValues()
+        [Test]
+        public void GetAppSettings_WhenKeyIsNullOrEmpty_ThrowsException()
+        {
+            Assert.Throws<ArgumentNullException>(() => _konfiggy.GetAppSetting(null));
+            Assert.Throws<ArgumentNullException>(() => _konfiggy.GetAppSetting(String.Empty));
+        }
+
+        private ConnectionStringsSection GetFakeConnectionStrings()
+        {
+            var section = new ConnectionStringsSection();
+            section.ConnectionStrings.Add(new ConnectionStringSettings("Local.TestKey", "LocalConnectionStringValue"));
+            section.ConnectionStrings.Add(new ConnectionStringSettings("Dev.TestKey", "DevConnectionStringValue"));
+            section.ConnectionStrings.Add(new ConnectionStringSettings("QA.TestKey", "QAConnectionStringValue"));
+            section.ConnectionStrings.Add(new ConnectionStringSettings("Prod.TestKey", "ProdConnectionStringValue"));
+            return section;
+        }
+
+        private NameValueCollection GetFakeAppSettings()
         {
             return new NameValueCollection
             {

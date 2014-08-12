@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace Konfiggy.Helpers
+namespace Konfiggy
 {
     /// <summary>
     /// The default configuration keeper for Konfiggy. A thin wrapper around <see cref="System.Configuration.ConfigurationManager"/> in order to make it mockable
