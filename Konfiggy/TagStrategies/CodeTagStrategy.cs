@@ -1,7 +1,7 @@
 ﻿using System;
-using Konfiggy.Exceptions;
+using Konfiggy.Core.Exceptions;
 
-namespace Konfiggy.TagStrategies
+namespace Konfiggy.Core.TagStrategies
 {
     public class CodeTagStrategy : IEnvironmentTagStrategy
     {

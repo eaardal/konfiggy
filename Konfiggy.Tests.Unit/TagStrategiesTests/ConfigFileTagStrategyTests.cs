@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
-using Konfiggy.Config;
-using Konfiggy.Helpers;
-using Konfiggy.TagStrategies;
+using Konfiggy.Core;
+using Konfiggy.Core.Config;
+using Konfiggy.Core.TagStrategies;
 using Moq;
 using NUnit.Framework;
 

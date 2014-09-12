@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Konfiggy.Exceptions;
-using Konfiggy.TagStrategies;
+using Konfiggy.Core.Exceptions;
+using Konfiggy.Core.TagStrategies;
 using NUnit.Framework;
 
 namespace Konfiggy.Tests.Unit.TagStrategiesTests

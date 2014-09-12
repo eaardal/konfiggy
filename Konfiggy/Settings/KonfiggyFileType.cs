@@ -1,4 +1,4 @@
-﻿namespace Konfiggy.Settings
+﻿namespace Konfiggy.Core.Settings
 {
     public enum KonfiggyFileType
     {

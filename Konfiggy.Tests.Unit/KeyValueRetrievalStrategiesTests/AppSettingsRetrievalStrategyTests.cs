@@ -1,6 +1,6 @@
 ﻿using System.Collections.Specialized;
-using Konfiggy.Helpers;
-using Konfiggy.KeyValueRetrievalStrategies;
+using Konfiggy.Core;
+using Konfiggy.Core.KeyValueRetrievalStrategies;
 using Moq;
 using NUnit.Framework;
 

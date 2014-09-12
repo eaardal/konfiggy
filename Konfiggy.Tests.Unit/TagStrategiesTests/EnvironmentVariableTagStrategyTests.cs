@@ -1,7 +1,7 @@
 ﻿using System;
-using Konfiggy.Exceptions;
-using Konfiggy.Helpers;
-using Konfiggy.TagStrategies;
+using Konfiggy.Core;
+using Konfiggy.Core.Exceptions;
+using Konfiggy.Core.TagStrategies;
 using Moq;
 using NUnit.Framework;
 

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfiggy", "Konfiggy\Konfiggy.csproj", "{4AB855ED-7382-435D-BDE2-BF625411BECE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfiggy.Core", "Konfiggy\Konfiggy.Core.csproj", "{4AB855ED-7382-435D-BDE2-BF625411BECE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfiggy.Tests.Unit", "Konfiggy.Tests.Unit\Konfiggy.Tests.Unit.csproj", "{032DF126-BF59-459C-8E77-D917050DE719}"
 EndProject

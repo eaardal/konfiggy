@@ -1,5 +1,5 @@
-﻿using Konfiggy.Config;
-using Konfiggy.Helpers;
+﻿using Konfiggy.Core;
+using Konfiggy.Core.Config;
 using Moq;
 using NUnit.Framework;
 

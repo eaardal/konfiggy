@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
 
-namespace Konfiggy.Helpers
+namespace Konfiggy.Core.Helpers
 {
     public static class Converters
     {

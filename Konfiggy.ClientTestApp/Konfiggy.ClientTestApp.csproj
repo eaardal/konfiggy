@@ -48,9 +48,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Konfiggy\Konfiggy.csproj">
+    <ProjectReference Include="..\Konfiggy\Konfiggy.Core.csproj">
       <Project>{4ab855ed-7382-435d-bde2-bf625411bece}</Project>
-      <Name>Konfiggy</Name>
+      <Name>Konfiggy.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

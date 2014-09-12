@@ -1,10 +1,9 @@
 ﻿using System;
 using System.IO;
-using System.Security.AccessControl;
 using System.Text;
 using System.Threading;
 
-namespace Konfiggy.Helpers
+namespace Konfiggy.Core.Helpers
 {
     public static class FileHelpers
     {

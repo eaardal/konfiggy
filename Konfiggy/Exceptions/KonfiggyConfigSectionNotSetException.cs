@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Konfiggy.Exceptions
+namespace Konfiggy.Core.Exceptions
 {
     public class KonfiggyConfigSectionNotSetException : Exception
     {

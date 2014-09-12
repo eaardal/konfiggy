@@ -1,6 +1,6 @@
 using System.Configuration;
 
-namespace Konfiggy.Config
+namespace Konfiggy.Core.Config
 {
     /// <summary>
     /// Represents a EnvironmentTag element in a Konfiggy configuration section in the app.config

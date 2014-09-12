@@ -7,8 +7,8 @@
     <ProjectGuid>{4AB855ED-7382-435D-BDE2-BF625411BECE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Konfiggy</RootNamespace>
-    <AssemblyName>Konfiggy</AssemblyName>
+    <RootNamespace>Konfiggy.Core</RootNamespace>
+    <AssemblyName>Konfiggy.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

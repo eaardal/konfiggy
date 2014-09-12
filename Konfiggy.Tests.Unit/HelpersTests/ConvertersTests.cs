@@ -5,8 +5,8 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Konfiggy.Core.Helpers;
 using NUnit.Framework;
-using Konfiggy.Helpers;
 
 namespace Konfiggy.Tests.Unit.HelpersTests
 {

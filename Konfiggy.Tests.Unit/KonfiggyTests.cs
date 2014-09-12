@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.Configuration;
-using Konfiggy.Exceptions;
-using Konfiggy.Helpers;
-using Konfiggy.TagStrategies;
+using Konfiggy.Core;
+using Konfiggy.Core.Exceptions;
+using Konfiggy.Core.TagStrategies;
 using Moq;
 using NUnit.Framework;
 
@@ -17,7 +17,7 @@ namespace Konfiggy.Tests.Unit
         [SetUp]
         public void SetUp()
         {
-            _konfiggy = new Konfiggy();
+            _konfiggy = new Core.Konfiggy();
         }
 
         [Test]

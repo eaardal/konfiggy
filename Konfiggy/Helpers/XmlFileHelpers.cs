@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
 
-namespace Konfiggy.Helpers
+namespace Konfiggy.Core.Helpers
 {
     public static class XmlFileHelpers
     {

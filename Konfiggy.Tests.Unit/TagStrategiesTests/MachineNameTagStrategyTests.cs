@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Konfiggy.Exceptions;
-using Konfiggy.Helpers;
-using Konfiggy.TagStrategies;
+using Konfiggy.Core;
+using Konfiggy.Core.Exceptions;
+using Konfiggy.Core.TagStrategies;
 using Moq;
 using NUnit.Framework;
 
