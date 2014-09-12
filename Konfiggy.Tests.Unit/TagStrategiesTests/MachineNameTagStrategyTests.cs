@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Konfiggy.Core;
-using Konfiggy.Core.Exceptions;
-using Konfiggy.Core.TagStrategies;
+﻿using System.Collections.Generic;
+using KonfiggyFramework;
+using KonfiggyFramework.Exceptions;
+using KonfiggyFramework.TagStrategies;
 using Moq;
 using NUnit.Framework;
 

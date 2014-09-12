@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
-using Konfiggy.Core.Helpers;
+using KonfiggyFramework.Helpers;
 
-namespace Konfiggy.Core.KeyValueRetrievalStrategies
+namespace KonfiggyFramework.KeyValueRetrievalStrategies
 {
     public class AppSettingsRetrievalStrategy : IKeyValueRetrievalStrategy
     {

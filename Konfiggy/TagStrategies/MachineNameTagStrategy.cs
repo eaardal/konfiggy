@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Konfiggy.Core.Exceptions;
+using KonfiggyFramework.Exceptions;
 
-namespace Konfiggy.Core.TagStrategies
+namespace KonfiggyFramework.TagStrategies
 {
     public class MachineNameTagStrategy : IEnvironmentTagStrategy
     {

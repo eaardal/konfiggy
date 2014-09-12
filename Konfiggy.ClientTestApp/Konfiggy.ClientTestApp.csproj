@@ -45,12 +45,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Konfiggy\Konfiggy.Core.csproj">
+    <ProjectReference Include="..\Konfiggy\KonfiggyFramework.csproj">
       <Project>{4ab855ed-7382-435d-bde2-bf625411bece}</Project>
-      <Name>Konfiggy.Core</Name>
+      <Name>KonfiggyFramework</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

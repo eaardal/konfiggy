@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Konfiggy.Core.Exceptions;
-using Konfiggy.Core.KeyValueRetrievalStrategies;
-using Konfiggy.Core.TagStrategies;
+using KonfiggyFramework.Exceptions;
+using KonfiggyFramework.KeyValueRetrievalStrategies;
+using KonfiggyFramework.TagStrategies;
 
-namespace Konfiggy.Core
+namespace KonfiggyFramework
 {
     /// <summary>
     /// The main entry point for using Konfiggy.

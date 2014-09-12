@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Konfiggy.Core.Exceptions
+namespace KonfiggyFramework.Exceptions
 {
     public class KonfiggyTagStrategyNotSetException : Exception
     {

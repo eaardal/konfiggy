@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
-using Konfiggy.Core.Helpers;
+using KonfiggyFramework.Helpers;
 
-namespace Konfiggy.Core.KeyValueRetrievalStrategies
+namespace KonfiggyFramework.KeyValueRetrievalStrategies
 {
     public class ConnectionStringsRetrievalStrategy : IKeyValueRetrievalStrategy
     {

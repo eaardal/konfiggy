@@ -1,4 +1,4 @@
-﻿namespace Konfiggy.Core
+﻿namespace KonfiggyFramework
 {
     public interface IConfigurationKeeper
     {

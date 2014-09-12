@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace Konfiggy.Core.Config
+namespace KonfiggyFramework.Config
 {
     /// <summary>
     /// Represents the Konfiggy section in the app.config file.

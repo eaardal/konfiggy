@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
-using Konfiggy.Core;
-using Konfiggy.Core.KeyValueRetrievalStrategies;
+using KonfiggyFramework;
+using KonfiggyFramework.KeyValueRetrievalStrategies;
 using Moq;
 using NUnit.Framework;
 

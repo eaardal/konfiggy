@@ -1,4 +1,4 @@
-﻿namespace Konfiggy.Core.Config
+﻿namespace KonfiggyFramework.Config
 {
     public interface IEnvironmentTagElement
     {

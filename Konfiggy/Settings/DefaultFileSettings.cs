@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using Konfiggy.Core.TagStrategies;
+using KonfiggyFramework.TagStrategies;
 
-namespace Konfiggy.Core.Settings
+namespace KonfiggyFramework.Settings
 {
     /// <summary>
     /// The default settings used when creating a file to hold the Environment Tag using the <see cref="FileTagStrategy"/> or any of its children (<see cref="TextFileTagStrategy"/>)

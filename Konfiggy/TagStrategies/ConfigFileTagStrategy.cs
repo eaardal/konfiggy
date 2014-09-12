@@ -1,6 +1,6 @@
-﻿using Konfiggy.Core.Config;
+﻿using KonfiggyFramework.Config;
 
-namespace Konfiggy.Core.TagStrategies
+namespace KonfiggyFramework.TagStrategies
 {
     public class ConfigFileTagStrategy : IEnvironmentTagStrategy
     {

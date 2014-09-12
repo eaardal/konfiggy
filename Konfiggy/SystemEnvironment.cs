@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Konfiggy.Core
+namespace KonfiggyFramework
 {
     public class SystemEnvironment : ISystemEnvironment
     {

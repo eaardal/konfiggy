@@ -1,8 +1,8 @@
-﻿using Konfiggy.Core.Exceptions;
-using Konfiggy.Core.Helpers;
-using Konfiggy.Core.Settings;
+﻿using KonfiggyFramework.Exceptions;
+using KonfiggyFramework.Helpers;
+using KonfiggyFramework.Settings;
 
-namespace Konfiggy.Core.TagStrategies
+namespace KonfiggyFramework.TagStrategies
 {
     public abstract class FileTagStrategy : IEnvironmentTagStrategy
     {

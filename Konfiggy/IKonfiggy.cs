@@ -1,7 +1,7 @@
-﻿using Konfiggy.Core.KeyValueRetrievalStrategies;
-using Konfiggy.Core.TagStrategies;
+﻿using KonfiggyFramework.KeyValueRetrievalStrategies;
+using KonfiggyFramework.TagStrategies;
 
-namespace Konfiggy.Core
+namespace KonfiggyFramework
 {
     public interface IKonfiggy
     {

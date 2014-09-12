@@ -1,4 +1,4 @@
-﻿namespace Konfiggy.Core.Helpers
+﻿namespace KonfiggyFramework.Helpers
 {
     public static class TextFileHelpers
     {

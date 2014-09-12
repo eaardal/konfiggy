@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 
-namespace Konfiggy.Core.Helpers
+namespace KonfiggyFramework.Helpers
 {
     public static class FileHelpers
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Konfiggy.Core;
-using Konfiggy.Core.KeyValueRetrievalStrategies;
+using KonfiggyFramework;
+using KonfiggyFramework.KeyValueRetrievalStrategies;
 
 namespace Konfiggy.ClientTestApp
 {
@@ -9,7 +9,7 @@ namespace Konfiggy.ClientTestApp
     {
         static void Main(string[] args)
         {
-            IKonfiggy konfiggy = new Core.Konfiggy();
+            IKonfiggy konfiggy = new KonfiggyFramework.Konfiggy();
             konfiggy.ConfigurationKeeper = new ConfigurationKeeper();
             //konfiggy.EnvironmentTagStrategy = new ConfigFileTagStrategy();
             //konfiggy.EnvironmentTagStrategy = new CodeTagStrategy("QA");

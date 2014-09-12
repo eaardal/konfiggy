@@ -7,8 +7,8 @@
     <ProjectGuid>{4AB855ED-7382-435D-BDE2-BF625411BECE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Konfiggy.Core</RootNamespace>
-    <AssemblyName>Konfiggy.Core</AssemblyName>
+    <RootNamespace>KonfiggyFramework</RootNamespace>
+    <AssemblyName>KonfiggyFramework</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -42,11 +42,6 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationKeeper.cs" />
@@ -65,7 +60,6 @@
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Helpers\FileHelpers.cs" />
     <Compile Include="Helpers\TextFileHelpers.cs" />
-    <Compile Include="Helpers\XmlFileHelpers.cs" />
     <Compile Include="IConfigurationKeeper.cs" />
     <Compile Include="IKonfiggy.cs" />
     <Compile Include="ISystemEnvironment.cs" />
@@ -87,7 +81,6 @@
     <Compile Include="TagStrategies\MachineNameTagStrategy.cs" />
     <Compile Include="TagStrategies\TextFileTagStrategy.cs" />
     <Compile Include="TagStrategies\IEnvironmentTagStrategy.cs" />
-    <Compile Include="TagStrategies\XmlFileTagStrategy.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

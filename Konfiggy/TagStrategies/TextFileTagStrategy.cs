@@ -1,7 +1,7 @@
-﻿using Konfiggy.Core.Helpers;
-using Konfiggy.Core.Settings;
+﻿using KonfiggyFramework.Helpers;
+using KonfiggyFramework.Settings;
 
-namespace Konfiggy.Core.TagStrategies
+namespace KonfiggyFramework.TagStrategies
 {
     public class TextFileTagStrategy : FileTagStrategy
     {

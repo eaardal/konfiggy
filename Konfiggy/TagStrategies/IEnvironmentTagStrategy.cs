@@ -1,4 +1,4 @@
-﻿namespace Konfiggy.Core.TagStrategies
+﻿namespace KonfiggyFramework.TagStrategies
 {
     public interface IEnvironmentTagStrategy
     {

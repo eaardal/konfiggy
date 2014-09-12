@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Konfiggy.Core.KeyValueRetrievalStrategies
+namespace KonfiggyFramework.KeyValueRetrievalStrategies
 {
     public interface IKeyValueRetrievalStrategy
     {
