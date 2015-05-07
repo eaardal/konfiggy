@@ -70,6 +70,23 @@ namespace Konfiggy.Tests.Unit
         }
 
         [Test]
+        public void GetAppSettings_WithNoEnvironmentTagInKeyShouldReturnCommonValue_TagValueIsIgnored()
+        {
+            var tagStrat = new Mock<IEnvironmentTagStrategy>();
+            tagStrat.Setup(ctx => ctx.GetEnvironmentTag()).Returns("Local");
+
+            var config = new Mock<IConfigurationKeeper>();
+            config.Setup(ctx => ctx.GetSection("appSettings")).Returns(GetFakeAppSettings());
+
+            _konfiggy.EnvironmentTagStrategy = tagStrat.Object;
+            _konfiggy.ConfigurationKeeper = config.Object;
+
+            string result = _konfiggy.GetAppSetting("CommonTestValue");
+
+            Assert.AreEqual("CommonValue", result);
+        }
+
+        [Test]
         public void WhenKeyDoesNotExistInKeyValueStore_ThrowsKonfiggyKeyNotFoundException()
         {
             var tagStrat = new Mock<IEnvironmentTagStrategy>();
@@ -105,6 +122,7 @@ namespace Konfiggy.Tests.Unit
         {
             return new NameValueCollection
             {
+                {"CommonTestValue", "CommonValue"},
                 {"Local.TestValue", "LocalValue"},
                 {"Dev.TestValue", "DevValue"},
                 {"QA.TestValue", "QAValue"},
