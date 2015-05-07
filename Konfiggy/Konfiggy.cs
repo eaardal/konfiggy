@@ -106,10 +106,17 @@ namespace KonfiggyFramework
         {
             try
             {
-                string value = collection[fullKey];
-                if (String.IsNullOrEmpty(value))
-                    throw new KonfiggyKeyNotFoundException(
-                        "Could not find any configuration entry in the name-value collection with the key " + fullKey);
+                string value;
+
+                if (collection.ContainsKey(fullKey))
+                {
+                    value = collection[fullKey];
+                }
+                else
+                {
+                    var key = fullKey.Remove(0, fullKey.IndexOf('.') + 1);
+                    value = collection[key];
+                }
 
                 return value;
             }
