@@ -3,7 +3,7 @@
 namespace KonfiggyFramework
 {
     /// <summary>
-    /// The default configuration keeper for Konfiggy. A thin wrapper around <see cref="System.Configuration.ConfigurationManager"/> in order to make it mockable
+    /// The default configuration keeper for Konfiggy. A thin wrapper around <see cref="System.Configuration.ConfigurationManager"/>
     /// </summary>
     public class ConfigurationKeeper : IConfigurationKeeper
     {

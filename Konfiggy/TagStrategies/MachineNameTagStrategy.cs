@@ -5,9 +5,21 @@ using KonfiggyFramework.Exceptions;
 
 namespace KonfiggyFramework.TagStrategies
 {
+    /// <summary>
+    /// Resolves the Environment Tag by using the current machine's name and the provided dictionary
+    /// </summary>
     public class MachineNameTagStrategy : IEnvironmentTagStrategy
     {
+        /// <summary>
+        /// Gets or Sets the dictionary that maps machine names to environment tags. For example:
+        /// "192.168.1.2" -> "Dev"
+        /// "192.168.1.3" -> "Prod"
+        /// </summary>
         public IDictionary<string, string> MachineNamesMap { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the system environment that resolves the machine name.
+        /// </summary>
         public ISystemEnvironment SystemEnvironment { get; set; }
 
         public MachineNameTagStrategy(IDictionary<string, string> machineNamesMap)
@@ -17,7 +29,11 @@ namespace KonfiggyFramework.TagStrategies
 
             SystemEnvironment = new SystemEnvironment();
         }
-
+        
+        /// <summary>
+        /// Gets the Environment Tag using the provided configuration
+        /// </summary>
+        /// <returns>Returns the Environment Tag</returns>
         public string GetEnvironmentTag()
         {
             if (MachineNamesMap == null || !MachineNamesMap.Any())

@@ -27,7 +27,7 @@ namespace Konfiggy.ClientTestApp
 
             var customStorageValue = konfiggy.GetCustom("MySetting", new CustomKeyValueRetrievalStrategy());
             Console.WriteLine("Value for custom key/value storage: " + customStorageValue);
-
+            
             Console.ReadLine();
         }
 

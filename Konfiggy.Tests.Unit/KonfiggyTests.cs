@@ -39,14 +39,14 @@ namespace Konfiggy.Tests.Unit
         }
 
         [Test]
-        public void GeneralBehavior_WhenNoConfigurationKeeperIsGivenThroughInitialize_UsesDefaultConfigurationKeeper()
+        public void Constructor_SetsDefaultConfigurationKeeper()
         {
             Assert.IsNotNull(_konfiggy.ConfigurationKeeper);
             Assert.IsInstanceOf<ConfigurationKeeper>(_konfiggy.ConfigurationKeeper);
         }
 
         [Test]
-        public void GeneralBehavior_WhenNoTagStrategyIsGivenThroughInitialize_UsesDefaultTagStrategy()
+        public void Constructor_SetsDefaultEnvironmentTagStrategy()
         {
             Assert.IsNotNull(_konfiggy.EnvironmentTagStrategy);
             Assert.IsInstanceOf<ConfigFileTagStrategy>(_konfiggy.EnvironmentTagStrategy);

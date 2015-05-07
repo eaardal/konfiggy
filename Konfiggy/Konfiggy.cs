@@ -26,8 +26,15 @@ namespace KonfiggyFramework
         /// </summary>
         public IConfigurationKeeper ConfigurationKeeper { get; set; }
 
+        /// <summary>
+        /// The strategy for retrieving the key-value collection that contains the configuration values.
+        /// </summary>
         private IKeyValueRetrievalStrategy _keyValueRetrievalStrategy;
 
+        /// <summary>
+        /// Constructs Konffigy, using <see cref="KonfiggyFramework.ConfigurationKeeper"/> as the default <see cref="ConfigurationKeeper"/> 
+        /// and <see cref="ConfigFileTagStrategy"/> as the default <see cref="EnvironmentTagStrategy"/>
+        /// </summary>
         public Konfiggy()
         {
             ConfigurationKeeper = new ConfigurationKeeper();
@@ -82,7 +89,7 @@ namespace KonfiggyFramework
 
             if (String.IsNullOrEmpty(environmentTag))
                 throw new KonfiggyEnvironmentTagNotFoundException(
-                    "Could not find any Konfiggy environment tag with the IEnvironmentTagStrategy given");
+                    "Could not find any Konfiggy environment tag with the IEnvironmentTagStrategy: " + EnvironmentTagStrategy.GetType().FullName);
 
             var completeKey = CreateCompleteKey(environmentTag, key);
             return GetValueForKeyInCollection(completeKey, dictionary);
@@ -91,10 +98,10 @@ namespace KonfiggyFramework
         private void VerifyConfigurations()
         {
             if (EnvironmentTagStrategy == null)
-                throw new KonfiggyTagStrategyNotSetException("Please provider an implementation of IEnvironmentTagStrategy through calling the Konfiggy.Initialize() method");
+                throw new KonfiggyTagStrategyNotSetException("Please provider an implementation of IEnvironmentTagStrategy");
 
             if (ConfigurationKeeper == null)
-                throw new KonfiggyConfigurationKeeperNotSetException("Please provide an implementation of IConfiguraitonKeeper through calling the Konfiggy.Initialize() method");
+                throw new KonfiggyConfigurationKeeperNotSetException("Please provide an implementation of IConfigurationKeeper");
         }
 
         private string CreateCompleteKey(string environmentTag, string key)
