@@ -5,6 +5,8 @@ using KonfiggyFramework.KeyValueRetrievalStrategies;
 
 namespace Konfiggy.ClientTestApp
 {
+    using KonfiggyFramework.TagStrategies;
+
     class Program
     {
         static void Main(string[] args)
@@ -12,12 +14,12 @@ namespace Konfiggy.ClientTestApp
             IKonfiggy konfiggy = new KonfiggyFramework.Konfiggy();
             konfiggy.ConfigurationKeeper = new ConfigurationKeeper();
             //konfiggy.EnvironmentTagStrategy = new ConfigFileTagStrategy();
-            //konfiggy.EnvironmentTagStrategy = new CodeTagStrategy("QA");
+            konfiggy.EnvironmentTagStrategy = new CodeTagStrategy("Dev");
             //konfiggy.EnvironmentTagStrategy = new EnvironmentVariableTagStrategy();
             //konfiggy.EnvironmentTagStrategy = new MachineNameTagStrategy(CreateMachineNamesMap());
             //konfiggy.EnvironmentTagStrategy = new TextFileTagStrategy(new DefaultFileSettings());
 
-            var settingValue = konfiggy.GetAppSetting("MySetting");
+            var settingValue = konfiggy.GetAppSetting("setting");
             Console.WriteLine("Value for MySetting key: " + settingValue);
 
             var connStringValue = konfiggy.GetConnectionString("MyConnString");
