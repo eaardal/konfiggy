@@ -2,6 +2,10 @@
 
 Konfiggy is a tiny helper utility for making life easier when dealing with environment-dependent configuration settings in your app/web.config files.
 
+### NuGet install
+`Install-Package Konfiggy`
+
+### Elevator pitch
 Konfiggy enables you to write your app/web.configs like this:
 
 ```csharp
