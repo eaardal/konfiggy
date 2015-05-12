@@ -21,7 +21,7 @@ You then configure Konfiggy to resolve the `dev`, `qa`, or `prod` tags in some w
 And query your appSetting/connectionString like this:
 ```csharp
 IKonfiggy konfiggy = new Konfiggy(); // Or resolve from IoC...
-string myValue = konfiggy.GetAppSetting("MySetting");
+string myValue = konfiggy.GetAppSetting("mySetting");
 ```
 
 [More info in the Wiki](https://github.com/eaardal/Konfiggy/wiki/Getting-started) 
