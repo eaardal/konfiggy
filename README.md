@@ -11,7 +11,7 @@ Konfiggy enables you to write your app/web.configs like this:
     <add key="prod.mySetting" value="prod-specific-value" />
 </appSettings>
 ```
-You then configure Konfiggy to resolve the `dev`, `qa`, or `prod` tags in some way. The built-in methods include
+You then configure Konfiggy to resolve the `dev`, `qa`, or `prod` tags (you can use whatever tags/names you want) in some way. The built-in methods include
 - Machine Environment Variable
 - Conditional Compilation
 - In code
