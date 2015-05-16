@@ -21,12 +21,31 @@ namespace Konfiggy.ClientTestApp
 
             var settingValue = konfiggy.GetAppSetting("setting");
             Console.WriteLine("Value for MySetting key: " + settingValue);
+            Console.WriteLine();
 
             var connStringValue = konfiggy.GetConnectionString("MyConnString");
             Console.WriteLine("Value for connection string MyConnString: " + connStringValue);
+            Console.WriteLine();
 
             var customStorageValue = konfiggy.GetCustom("MySetting", new CustomKeyValueRetrievalStrategy());
             Console.WriteLine("Value for custom key/value storage: " + customStorageValue);
+            Console.WriteLine();
+
+            var settings = konfiggy.GetAppSettings();
+
+            foreach (var setting in settings)
+            {
+                Console.WriteLine("{0} - {1}", setting.Key, setting.Value);
+            }
+            Console.WriteLine();
+
+            var connections = konfiggy.GetConnectionStrings();
+
+            foreach (var connection in connections)
+            {
+                Console.WriteLine("{0} - {1}", connection.Key, connection.Value);
+            }
+            Console.WriteLine();
 
             Console.ReadLine();
         }
