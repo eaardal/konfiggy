@@ -7,20 +7,19 @@ namespace Konfiggy.Tests.Unit.Fixtures
 {
     public class ConfigurationLoaderFixture
     {
+        public Mock<IKonfiggy> Konfiggy { get; set; }
         public Mock<IConfigurationKeeper> ConfigurationKeeper { get; set; }
-        public Mock<IKeyValueRetrievalStrategy> AppSettingsRetrievalStrategy { get; set; }
-        public Mock<IKeyValueRetrievalStrategy> ConnectionStringsRetrievalStrategy { get; set; }
 
         public ConfigurationLoaderFixture()
         {
+            Konfiggy = new Mock<IKonfiggy>();
             ConfigurationKeeper = new Mock<IConfigurationKeeper>();
-            AppSettingsRetrievalStrategy = new Mock<IKeyValueRetrievalStrategy>();
-            ConnectionStringsRetrievalStrategy = new Mock<IKeyValueRetrievalStrategy>();
         }
 
         public ConfigurationLoader<T> CreateSut<T>() where T : new()
         {
-            return new ConfigurationLoader<T>(ConfigurationKeeper.Object, AppSettingsRetrievalStrategy.Object, ConnectionStringsRetrievalStrategy.Object);
+            Konfiggy.Object.ConfigurationKeeper = ConfigurationKeeper.Object;
+            return new ConfigurationLoader<T>(Konfiggy.Object);
         }
 
         public class TestConfig

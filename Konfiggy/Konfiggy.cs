@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using KonfiggyFramework.Exceptions;
 using KonfiggyFramework.KeyValueRetrievalStrategies;
 using KonfiggyFramework.TagStrategies;
@@ -78,7 +80,7 @@ namespace KonfiggyFramework
 
         public IConfigurationLoader<T> PopulateConfig<T>() where T : new()
         {
-            return new ConfigurationLoader<T>(ConfigurationKeeper, new AppSettingsRetrievalStrategy(), new ConnectionStringsRetrievalStrategy());
+            return new ConfigurationLoader<T>(this);
         }
 
         private string GetValue(string key)
@@ -116,13 +118,17 @@ namespace KonfiggyFramework
 
         private string GetValueForKeyInCollection(string fullKey, IDictionary<string, string> collection)
         {
+            var culture = CultureInfo.InvariantCulture;
+
             try
             {
+                var keyLowerCase = fullKey.ToLower(culture);
+
                 string value;
 
-                if (collection.ContainsKey(fullKey))
+                if (collection.Keys.Select(k => k.ToLower(culture)).Contains(keyLowerCase))
                 {
-                    value = collection[fullKey];
+                    value = collection.Single(kvp => kvp.Key.ToLower(culture) == keyLowerCase).Value;
                 }
                 else
                 {

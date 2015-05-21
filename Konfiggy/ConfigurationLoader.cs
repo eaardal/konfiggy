@@ -3,26 +3,18 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using KonfiggyFramework.Exceptions;
-using KonfiggyFramework.KeyValueRetrievalStrategies;
 
 namespace KonfiggyFramework
 {
     public class ConfigurationLoader<T> : IConfigurationLoader<T> where T : new()
     {
-        private readonly IConfigurationKeeper _configurationKeeper;
-        private readonly IKeyValueRetrievalStrategy _appSettingsRetrievalStrategy;
-        private readonly IKeyValueRetrievalStrategy _connectionStringsRetrievalStrategy;
+        private readonly IKonfiggy _konfiggy;
         private readonly T _config;
 
-        public ConfigurationLoader(IConfigurationKeeper configurationKeeper, IKeyValueRetrievalStrategy appSettingsRetrievalStrategy, IKeyValueRetrievalStrategy connectionStringsRetrievalStrategy)
+        public ConfigurationLoader(IKonfiggy konfiggy)
         {
-            if (configurationKeeper == null) throw new ArgumentNullException("configurationKeeper");
-            if (appSettingsRetrievalStrategy == null) throw new ArgumentNullException("appSettingsRetrievalStrategy");
-            if (connectionStringsRetrievalStrategy == null) throw new ArgumentNullException("connectionStringsRetrievalStrategy");
-
-            _configurationKeeper = configurationKeeper;
-            _appSettingsRetrievalStrategy = appSettingsRetrievalStrategy;
-            _connectionStringsRetrievalStrategy = connectionStringsRetrievalStrategy;
+            if (konfiggy == null) throw new ArgumentNullException("konfiggy");
+            _konfiggy = konfiggy;
 
             _config = new T();
         }
@@ -34,21 +26,19 @@ namespace KonfiggyFramework
 
         public ConfigurationLoader<T> WithAppSettings()
         {
-            var keyValues = _appSettingsRetrievalStrategy.GetKeyValueCollection(_configurationKeeper);
-            var keys = keyValues.Select(kvp => kvp.Key.ToLower(CultureInfo.InvariantCulture)).ToArray();
+            var culture = CultureInfo.InvariantCulture;
 
-            var type = typeof(T);
-            var properties = type.GetProperties().Where(p => p.CanRead && p.CanWrite);
+            var properties = typeof(T).GetProperties().Where(p => p.CanRead && p.CanWrite).ToArray();
 
-            try
+            foreach (var property in properties)
             {
-                foreach (var property in properties)
+                try
                 {
-                    var propertyName = property.Name.ToLower(CultureInfo.InvariantCulture);
+                    var propertyName = property.Name.ToLower(culture);
 
-                    if (!keys.Contains(propertyName)) continue;
+                    var val = _konfiggy.GetAppSetting(propertyName);
 
-                    var val = keyValues.Single(k => k.Key.ToLower(CultureInfo.InvariantCulture) == propertyName).Value;
+                    if (string.IsNullOrEmpty(val)) continue;
 
                     if (property.PropertyType == typeof(IEnumerable<string>))
                     {
@@ -62,10 +52,14 @@ namespace KonfiggyFramework
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                throw new KonfiggyUnmappableConfigValueException("Could not map a key/value from appSettings", ex);
+                catch (KonfiggyKeyNotFoundException)
+                {
+                    continue;
+                }
+                catch (Exception ex)
+                {
+                    throw new KonfiggyUnmappableConfigValueException("Could not map a key/value from appSettings", ex);
+                }
             }
 
             return this;
@@ -73,6 +67,36 @@ namespace KonfiggyFramework
 
         public ConfigurationLoader<T> WithConnectionStrings()
         {
+            var culture = CultureInfo.InvariantCulture;
+
+            var properties = typeof(T).GetProperties().Where(p => p.CanRead && p.CanWrite).ToArray();
+
+            foreach (var property in properties)
+            {
+                try
+                {
+                    var propertyName = property.Name.ToLower(culture);
+
+                    var val = _konfiggy.GetConnectionString(propertyName);
+
+                    if (!string.IsNullOrEmpty(val))
+                    {
+                        property.SetValue(_config, Convert.ChangeType(val, property.PropertyType));
+                    }
+                }
+                catch (KonfiggyKeyNotFoundException)
+                {
+                    continue;
+                }
+                catch (Exception ex)
+                {
+                    throw new KonfiggyUnmappableConfigValueException("Could not map a key/value from appSettings", ex);
+                }
+            }
+
+            return this;
+
+            /*
             var keyValues = _connectionStringsRetrievalStrategy.GetKeyValueCollection(_configurationKeeper);
             var keys = keyValues.Select(kvp => kvp.Key.ToLower(CultureInfo.InvariantCulture)).ToArray();
 
@@ -101,6 +125,7 @@ namespace KonfiggyFramework
             }
 
             return this;
+            */
         }
     }
 }

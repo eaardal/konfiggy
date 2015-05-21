@@ -13,9 +13,9 @@ namespace Konfiggy.ClientTestApp
         {
             IKonfiggy konfiggy = new KonfiggyFramework.Konfiggy();
             var config = konfiggy.PopulateConfig<AppConfig>().WithAppSettings().WithConnectionStrings().Load();
-            Console.WriteLine("Value for appSetting MySetting: " + config.MySetting);
-            Console.WriteLine("Value for appSetting Setting: " + config.Setting);
-            Console.WriteLine("Value for connString MyConnString: " + config.MyConnString);
+            //Console.WriteLine("Value for appSetting MySetting: " + config.MySetting);
+            //Console.WriteLine("Value for appSetting Setting: " + config.Setting);
+            //Console.WriteLine("Value for connString MyConnString: " + config.MyConnString);
 
             konfiggy.ConfigurationKeeper = new ConfigurationKeeper();
             //konfiggy.EnvironmentTagStrategy = new ConfigFileTagStrategy();

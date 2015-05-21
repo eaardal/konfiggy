@@ -108,6 +108,23 @@ namespace Konfiggy.Tests.Unit
             Assert.Throws<ArgumentNullException>(() => _konfiggy.GetAppSetting(String.Empty));
         }
 
+        [Test]
+        public void GetAppSettings_WhenRequestedKeyDoesNotMatchCase()
+        {
+            var tagStrat = new Mock<IEnvironmentTagStrategy>();
+            tagStrat.Setup(ctx => ctx.GetEnvironmentTag()).Returns("Local");
+
+            var config = new Mock<IConfigurationKeeper>();
+            config.Setup(ctx => ctx.GetSection("appSettings")).Returns(GetFakeAppSettings());
+
+            _konfiggy.EnvironmentTagStrategy = tagStrat.Object;
+            _konfiggy.ConfigurationKeeper = config.Object;
+
+            string result = _konfiggy.GetAppSetting("tEstVALue");
+
+            Assert.AreEqual("LocalValue", result);
+        }
+
         private ConnectionStringsSection GetFakeConnectionStrings()
         {
             var section = new ConnectionStringsSection();

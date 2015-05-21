@@ -51,18 +51,13 @@ namespace Konfiggy.Tests.Unit
         #region WithAppSettings Method
 
         [Test]
-        public void WithAppSettings_GetsAppSettingsFromAppSettingsRetrievalStrategy()
+        public void WithAppSettings_CallsGetAppSettingsOnKonfiggy()
         {
-            var dict = new Dictionary<string, string>();
-
-            _fixture.AppSettingsRetrievalStrategy.Setup(x => x.GetKeyValueCollection(_fixture.ConfigurationKeeper.Object)).Returns(dict);
-
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig>();
 
             sut.WithAppSettings();
-
-            _fixture.AppSettingsRetrievalStrategy.Verify(
-                x => x.GetKeyValueCollection(_fixture.ConfigurationKeeper.Object), Times.Once);
+            
+            _fixture.Konfiggy.Verify(x => x.GetAppSetting(It.IsAny<string>()));
         }
 
         [Test]
@@ -75,7 +70,7 @@ namespace Konfiggy.Tests.Unit
                 {"Key3", "Value3"},
             };
 
-            _fixture.AppSettingsRetrievalStrategy.Setup(x => x.GetKeyValueCollection(_fixture.ConfigurationKeeper.Object)).Returns(dict);
+            _fixture.ConfigurationKeeper.Setup(x => x.GetSection("appSettings")).Returns(dict);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig>();
 
@@ -96,7 +91,7 @@ namespace Konfiggy.Tests.Unit
                 {"key3", "Value3"},
             };
 
-            _fixture.AppSettingsRetrievalStrategy.Setup(x => x.GetKeyValueCollection(_fixture.ConfigurationKeeper.Object)).Returns(dict);
+            _fixture.ConfigurationKeeper.Setup(x => x.GetSection("appSettings")).Returns(dict);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig>();
 
@@ -117,7 +112,7 @@ namespace Konfiggy.Tests.Unit
                 {"KEY3", "Value3"},
             };
 
-            _fixture.AppSettingsRetrievalStrategy.Setup(x => x.GetKeyValueCollection(_fixture.ConfigurationKeeper.Object)).Returns(dict);
+            _fixture.ConfigurationKeeper.Setup(x => x.GetSection("appSettings")).Returns(dict);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig>();
 
@@ -138,7 +133,7 @@ namespace Konfiggy.Tests.Unit
                 {"key3", "Value3"},
             };
 
-            _fixture.AppSettingsRetrievalStrategy.Setup(x => x.GetKeyValueCollection(_fixture.ConfigurationKeeper.Object)).Returns(dict);
+            _fixture.ConfigurationKeeper.Setup(x => x.GetSection("appSettings")).Returns(dict);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig2>();
 
@@ -159,7 +154,7 @@ namespace Konfiggy.Tests.Unit
                 {"KEY3", "Value3"},
             };
 
-            _fixture.AppSettingsRetrievalStrategy.Setup(x => x.GetKeyValueCollection(_fixture.ConfigurationKeeper.Object)).Returns(dict);
+            _fixture.ConfigurationKeeper.Setup(x => x.GetSection("appSettings")).Returns(dict);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig2>();
 
@@ -180,7 +175,7 @@ namespace Konfiggy.Tests.Unit
                 {"KEY3", "Value3"},
             };
 
-            _fixture.AppSettingsRetrievalStrategy.Setup(x => x.GetKeyValueCollection(_fixture.ConfigurationKeeper.Object)).Returns(dict);
+            _fixture.ConfigurationKeeper.Setup(x => x.GetSection("appSettings")).Returns(dict);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig3>();
 
@@ -201,7 +196,7 @@ namespace Konfiggy.Tests.Unit
                 {"Key3", "4234234"},
             };
 
-            _fixture.AppSettingsRetrievalStrategy.Setup(x => x.GetKeyValueCollection(_fixture.ConfigurationKeeper.Object)).Returns(dict);
+            _fixture.ConfigurationKeeper.Setup(x => x.GetSection("appSettings")).Returns(dict);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig4>();
 
@@ -222,7 +217,7 @@ namespace Konfiggy.Tests.Unit
                 {"Key3", "true"}
             };
 
-            _fixture.AppSettingsRetrievalStrategy.Setup(x => x.GetKeyValueCollection(_fixture.ConfigurationKeeper.Object)).Returns(dict);
+            _fixture.ConfigurationKeeper.Setup(x => x.GetSection("appSettings")).Returns(dict);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig5>();
 
@@ -241,7 +236,7 @@ namespace Konfiggy.Tests.Unit
                 {"Key1", "foo;bar;hello;world"}
             };
 
-            _fixture.AppSettingsRetrievalStrategy.Setup(x => x.GetKeyValueCollection(_fixture.ConfigurationKeeper.Object)).Returns(dict);
+            _fixture.ConfigurationKeeper.Setup(x => x.GetSection("appSettings")).Returns(dict);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig6>();
 
@@ -263,18 +258,13 @@ namespace Konfiggy.Tests.Unit
         #region WithConnectionStrings Method
 
         [Test]
-        public void WithConnectionStrings_GetsAppSettingsFromAppSettingsRetrievalStrategy()
+        public void WithConnectionStrings_CallsGetConnectionStringOnKonfiggy()
         {
-            var dict = new Dictionary<string, string>();
-
-            _fixture.ConnectionStringsRetrievalStrategy.Setup(x => x.GetKeyValueCollection(_fixture.ConfigurationKeeper.Object)).Returns(dict);
-
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig>();
 
             sut.WithConnectionStrings();
 
-            _fixture.ConnectionStringsRetrievalStrategy.Verify(
-                x => x.GetKeyValueCollection(_fixture.ConfigurationKeeper.Object), Times.Once);
+            _fixture.Konfiggy.Verify(x => x.GetConnectionString(It.IsAny<string>()), Times.Once);
         }
 
         [Test]
@@ -287,7 +277,7 @@ namespace Konfiggy.Tests.Unit
                 {"Key3", "Value3"},
             };
 
-            _fixture.ConnectionStringsRetrievalStrategy.Setup(x => x.GetKeyValueCollection(_fixture.ConfigurationKeeper.Object)).Returns(dict);
+            _fixture.ConfigurationKeeper.Setup(x => x.GetSection("connectionStrings")).Returns(dict);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig>();
 
@@ -308,7 +298,7 @@ namespace Konfiggy.Tests.Unit
                 {"key3", "Value3"},
             };
 
-            _fixture.ConnectionStringsRetrievalStrategy.Setup(x => x.GetKeyValueCollection(_fixture.ConfigurationKeeper.Object)).Returns(dict);
+            _fixture.ConfigurationKeeper.Setup(x => x.GetSection("connectionStrings")).Returns(dict);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig>();
 
@@ -329,7 +319,7 @@ namespace Konfiggy.Tests.Unit
                 {"KEY3", "Value3"},
             };
 
-            _fixture.ConnectionStringsRetrievalStrategy.Setup(x => x.GetKeyValueCollection(_fixture.ConfigurationKeeper.Object)).Returns(dict);
+            _fixture.ConfigurationKeeper.Setup(x => x.GetSection("connectionStrings")).Returns(dict);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig>();
 
@@ -350,7 +340,7 @@ namespace Konfiggy.Tests.Unit
                 {"key3", "Value3"},
             };
 
-            _fixture.ConnectionStringsRetrievalStrategy.Setup(x => x.GetKeyValueCollection(_fixture.ConfigurationKeeper.Object)).Returns(dict);
+            _fixture.ConfigurationKeeper.Setup(x => x.GetSection("connectionStrings")).Returns(dict);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig2>();
 
@@ -371,7 +361,7 @@ namespace Konfiggy.Tests.Unit
                 {"KEY3", "Value3"},
             };
 
-            _fixture.ConnectionStringsRetrievalStrategy.Setup(x => x.GetKeyValueCollection(_fixture.ConfigurationKeeper.Object)).Returns(dict);
+            _fixture.ConfigurationKeeper.Setup(x => x.GetSection("connectionStrings")).Returns(dict);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig2>();
 
@@ -392,7 +382,7 @@ namespace Konfiggy.Tests.Unit
                 {"KEY3", "Value3"},
             };
 
-            _fixture.ConnectionStringsRetrievalStrategy.Setup(x => x.GetKeyValueCollection(_fixture.ConfigurationKeeper.Object)).Returns(dict);
+            _fixture.ConfigurationKeeper.Setup(x => x.GetSection("connectionStrings")).Returns(dict);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig3>();
 
