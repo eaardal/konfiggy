@@ -58,10 +58,12 @@
     <Compile Include="Exceptions\KonfiggyEnvironmentNotSetException.cs" />
     <Compile Include="Exceptions\KonfiggyServerNamesMapNotSetException.cs" />
     <Compile Include="Exceptions\KonfiggyTagStrategyNotSet.cs" />
+    <Compile Include="Exceptions\KonfiggyUnmappableConfigValueException.cs" />
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Helpers\FileHelpers.cs" />
     <Compile Include="Helpers\TextFileHelpers.cs" />
     <Compile Include="IConfigurationKeeper.cs" />
+    <Compile Include="IConfigurationLoader.cs" />
     <Compile Include="IKonfiggy.cs" />
     <Compile Include="ISystemEnvironment.cs" />
     <Compile Include="KeyValueRetrievalStrategies\AppSettingsRetrievalStrategy.cs" />

@@ -76,6 +76,11 @@ namespace KonfiggyFramework
             return GetValue(key);
         }
 
+        public IConfigurationLoader<T> PopulateConfig<T>() where T : new()
+        {
+            return new ConfigurationLoader<T>(ConfigurationKeeper, new AppSettingsRetrievalStrategy(), new ConnectionStringsRetrievalStrategy());
+        }
+
         private string GetValue(string key)
         {
             if (String.IsNullOrEmpty(key))

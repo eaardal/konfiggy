@@ -12,6 +12,11 @@ namespace Konfiggy.ClientTestApp
         static void Main(string[] args)
         {
             IKonfiggy konfiggy = new KonfiggyFramework.Konfiggy();
+            var config = konfiggy.PopulateConfig<AppConfig>().WithAppSettings().WithConnectionStrings().Load();
+            Console.WriteLine("Value for appSetting MySetting: " + config.MySetting);
+            Console.WriteLine("Value for appSetting Setting: " + config.Setting);
+            Console.WriteLine("Value for connString MyConnString: " + config.MyConnString);
+
             konfiggy.ConfigurationKeeper = new ConfigurationKeeper();
             //konfiggy.EnvironmentTagStrategy = new ConfigFileTagStrategy();
             konfiggy.EnvironmentTagStrategy = new CodeTagStrategy("Dev");
@@ -41,6 +46,13 @@ namespace Konfiggy.ClientTestApp
                 {"prod-environment-computer-name", "Prod"}
             };
         }
+    }
+
+    internal class AppConfig
+    {
+        public string MySetting { get; set; }
+        public string Setting { get; set; }
+        public string MyConnString { get; set; }
     }
 
     class CustomKeyValueRetrievalStrategy : IKeyValueRetrievalStrategy

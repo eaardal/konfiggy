@@ -42,5 +42,7 @@ namespace KonfiggyFramework
         /// The current IConfigurationKeeper instance will be given as input parameter. </param>
         /// <returns>Returns the value of the key-value entry matching the key given and the current Environment Tag.</returns>
         string GetCustom(string key, IKeyValueRetrievalStrategy keyValueRetrievalStrategy);
+
+        IConfigurationLoader<T> PopulateConfig<T>() where T : new();
     }
 }
