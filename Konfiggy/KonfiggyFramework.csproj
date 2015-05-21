@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationKeeper.cs" />
+    <Compile Include="ConfigurationLoader.cs" />
     <Compile Include="Config\ConfigSection.cs" />
     <Compile Include="Config\EnvironmentTagElement.cs" />
     <Compile Include="Config\IConfigSection.cs" />

@@ -56,6 +56,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ConfigTests\ConfigSectionTests.cs" />
+    <Compile Include="ConfigurationLoaderTests.cs" />
+    <Compile Include="Fixtures\ConfigurationLoaderFixture.cs" />
     <Compile Include="HelpersTests\ConvertersTests.cs" />
     <Compile Include="KeyValueRetrievalStrategiesTests\AppSettingsRetrievalStrategyTests.cs" />
     <Compile Include="KeyValueRetrievalStrategiesTests\ConnectionStringsRetrievalStrategyTests.cs" />
