@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using KonfiggyFramework.Exceptions;
+using KonfiggyFramework.Helpers;
 using KonfiggyFramework.KeyValueRetrievalStrategies;
 using KonfiggyFramework.TagStrategies;
 
 namespace KonfiggyFramework
 {
-    using System.Dynamic;
-
-    using KonfiggyFramework.Helpers;
-
     /// <summary>
     /// The main entry point for using Konfiggy.
     /// </summary>
@@ -79,7 +76,7 @@ namespace KonfiggyFramework
         /// <returns>Returns all the connectionstrings in the app's
         /// app/web.config connectionStrings section as properties on an 
         /// <see cref="T:System.Dynamic.ExpandoObject"/></returns>
-        public ExpandoObject GetConnectionStringsDynamic()
+        public dynamic GetConnectionStringsDynamic()
         {
             _keyValueRetrievalStrategy = new ConnectionStringsRetrievalStrategy();
 
@@ -117,7 +114,7 @@ namespace KonfiggyFramework
         /// <returns>Returns all the settings in the app's app/web.config
         /// appSettings section as properties on an 
         /// <see cref="T:System.Dynamic.ExpandoObject"/></returns>
-        public ExpandoObject GetAppSettingsDynamic()
+        public dynamic GetAppSettingsDynamic()
         {
             _keyValueRetrievalStrategy = new AppSettingsRetrievalStrategy();
 
@@ -172,7 +169,7 @@ namespace KonfiggyFramework
 
         private string CreateCompleteKey(string environmentTag, string key)
         {
-            return String.Format("{0}.{1}", environmentTag, key);
+            return string.Format("{0}.{1}", environmentTag, key);
         }
 
         private string GetValueForKeyInCollection(string fullKey, IDictionary<string, string> collection)

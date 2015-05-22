@@ -46,7 +46,7 @@ namespace KonfiggyFramework
         /// <returns>Returns all the connectionstrings in the app's
         /// app/web.config connectionStrings section as properties on an 
         /// <see cref="T:System.Dynamic.ExpandoObject"/></returns>
-        ExpandoObject GetConnectionStringsDynamic();
+        dynamic GetConnectionStringsDynamic();
 
         /// <summary>
         /// Get an app setting entry by its key. By default this looks in the app/web.config's appSettings section.
@@ -70,7 +70,7 @@ namespace KonfiggyFramework
         /// <returns>Returns all the settings in the app's app/web.config
         /// appSettings section as properties on an 
         /// <see cref="T:System.Dynamic.ExpandoObject"/></returns>
-        ExpandoObject GetAppSettingsDynamic();
+        dynamic GetAppSettingsDynamic();
 
         /// <summary>
         /// Get the value in a key-value collection matching the key given. Please provide the functionality for retrieving the key-value collection.  

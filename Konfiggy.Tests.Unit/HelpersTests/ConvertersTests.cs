@@ -51,6 +51,74 @@ namespace Konfiggy.Tests.Unit.HelpersTests
             Assert.AreEqual(nameValues[2], dictionary.ElementAt(2).Value);
         }
 
+        [Test]
+        public void ToExpando_ContainsExpectedKeyValueCount()
+        {
+            var nameValues = GetFakeNameValueCollection();
+
+            var dictionary = Converters.ConvertToDictionary(nameValues);
+            dynamic dynamicDict = dictionary.ToExpando();
+
+            var count = 0;
+            foreach (var property in dynamicDict)
+            {
+                count++;
+            }
+
+            Assert.AreEqual(3, count);
+        }
+
+        [Test]
+        public void ToExpando_ContainsExpectedKeyValues()
+        {
+            var nameValues = GetFakeNameValueCollection();
+
+            var dictionary = Converters.ConvertToDictionary(nameValues);
+            dynamic dynamicDict = dictionary.ToExpando();
+            
+            Assert.NotNull(dynamicDict.Name_1);
+            Assert.AreEqual(nameValues[0], dynamicDict.Name_1);
+
+            Assert.NotNull(dynamicDict.Name_2);
+            Assert.AreEqual(nameValues[1], dynamicDict.Name_2);
+
+            Assert.NotNull(dynamicDict.Name_3);
+            Assert.AreEqual(nameValues[2], dynamicDict.Name_3);
+        }
+
+        [Test]
+        public void ToExpando_RemovesDotInKeys()
+        {
+            var nameValues = new NameValueCollection
+            {
+                {"a.foo", "Value_1"},
+                {"b.foo", "Value_2"},
+                {"c.foo", "Value_3"},
+            };
+
+            var dictionary = Converters.ConvertToDictionary(nameValues);
+            dynamic dynamicDict = dictionary.ToExpando();
+
+            PrintProperties(dynamicDict);
+
+            Assert.NotNull(dynamicDict.AFoo);
+            Assert.AreEqual(nameValues[0], dynamicDict.AFoo);
+
+            Assert.NotNull(dynamicDict.BFoo);
+            Assert.AreEqual(nameValues[1], dynamicDict.BFoo);
+
+            Assert.NotNull(dynamicDict.CFoo);
+            Assert.AreEqual(nameValues[2], dynamicDict.CFoo);
+        }
+
+        private void PrintProperties(dynamic obj)
+        {
+            foreach (var prop in obj)
+            {
+                Console.WriteLine(prop.Key + ": " + prop.Value);
+            }
+        }
+
         private NameValueCollection GetFakeNameValueCollection()
         {
             return new NameValueCollection
