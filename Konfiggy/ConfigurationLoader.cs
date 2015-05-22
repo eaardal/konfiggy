@@ -107,17 +107,91 @@ namespace KonfiggyFramework
 
             return this;
         }
-
+        
         private void SetValueForProperty(PropertyInfo property, string value)
         {
-            if (property.PropertyType == typeof(IEnumerable<string>) && value.Contains(';'))
+            if (IsIEnumerable(property))
             {
-                property.SetValue(_config, value.Split(';'));
+                Type innerType;
+                var hasSingleTypeParam = TryGetIEnumerableType(property, out innerType);
+
+                if (!hasSingleTypeParam) return;
+
+                var values = value.Split(KonfiggySettings.ConfigListValueSeparator);
+
+                var list = values.Select(v => ConvertValue(v, Type.GetTypeCode(innerType))).CastGeneric(innerType);
+
+                property.SetValue(_config, list);
             }
+
+            #region TODO: Dictionary parsing
+
+            //else if (IsKeyValueCollection(property))
+            //{
+            //    Type keyType;
+            //    Type valueType;
+            //    var foundDictTypes = TryGetDictionaryTypes(property, out keyType, out valueType);
+
+            //    if (!foundDictTypes) return;
+
+            //    var kvps = value.Split(KonfiggySettings.ConfigListValueSeparator).Select(x => x.Split(KonfiggySettings.ConfigDictionarySeparator));
+
+            //    var list = kvps.Select(v => ConvertValue(v, Type.GetTypeCode(innerType))).CastGeneric(innerType);
+
+            //    //property.SetValue(_config, list);
+            //}
+
+            #endregion
+
             else
             {
                 property.SetValue(_config, ConvertValue(value, property));
             }
+        }
+
+        private bool IsKeyValueCollection(PropertyInfo property)
+        {
+            return property.PropertyType.IsGenericType && property.PropertyType.FullName.Contains("Dictionary");
+        }
+
+        private bool IsIEnumerable(PropertyInfo property)
+        {
+            return property.PropertyType.IsGenericType && property.PropertyType.FullName.Contains("IEnumerable");
+        }
+
+        private bool TryGetDictionaryTypes(PropertyInfo property, out Type keyType, out Type valueType)
+        {
+            var genericTypeArguments = property.PropertyType.GenericTypeArguments;
+
+            if (genericTypeArguments.Count() == 2)
+            {
+                keyType = genericTypeArguments.First();
+                valueType = genericTypeArguments.Last();
+                return true;
+            }
+
+            keyType = null;
+            valueType = null;
+            return false;
+        }
+
+        private bool TryGetIEnumerableType(PropertyInfo property, out Type type)
+        {
+            var genericTypeArguments = property.PropertyType.GenericTypeArguments;
+
+            if (genericTypeArguments.Count() == 1)
+            {
+                type = genericTypeArguments.Single();
+                return true;
+            }
+
+            type = null;
+            return false;
+        }
+
+        private static object ConvertValue(string value, TypeCode type)
+        {
+            return Convert.ChangeType(value, type, KonfiggySettings.Culture);
         }
 
         private static object ConvertValue(string value, PropertyInfo property)

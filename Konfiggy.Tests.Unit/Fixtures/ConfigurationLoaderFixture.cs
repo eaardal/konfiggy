@@ -59,7 +59,25 @@ namespace Konfiggy.Tests.Unit.Fixtures
 
         public class TestConfig6
         {
-            public IEnumerable<string> Key1 { get; set; }
+            public IEnumerable<string> Strings { get; set; }
+            public IEnumerable<int> Ints { get; set; }
+            public IEnumerable<bool> Bools { get; set; }
+            public IEnumerable<byte> Bytes { get; set; }
+            public IEnumerable<sbyte> SBytes { get; set; }
+            public IEnumerable<uint> UInts { get; set; }
+            public IEnumerable<short> Shorts { get; set; }
+            public IEnumerable<ushort> UShorts { get; set; }
+            public IEnumerable<long> Longs { get; set; }
+            public IEnumerable<ulong> ULongs { get; set; }
+            public IEnumerable<float> Floats { get; set; }
+            public IEnumerable<double> Doubles { get; set; }
+            public IEnumerable<char> Chars { get; set; }
+            public IEnumerable<decimal> Decimals { get; set; }
+        }
+
+        public class TestConfig7
+        {
+            public IDictionary<string, string> StringString { get; set; }
         }
     }
 }
