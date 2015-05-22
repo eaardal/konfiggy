@@ -3,6 +3,9 @@ using KonfiggyFramework.TagStrategies;
 
 namespace KonfiggyFramework
 {
+    using System.Collections.Generic;
+    using System.Dynamic;
+
     public interface IKonfiggy
     {
         /// <summary>
@@ -28,11 +31,46 @@ namespace KonfiggyFramework
         string GetConnectionString(string name);
 
         /// <summary>
+        /// Get an <see cref="T:System.Collections.IDictionary"/>{TKey, TValue} of all connection strings.
+        ///  By default this looks in the app/web.config's connectionStrings section.
+        /// </summary>
+        /// <returns>Returns all the settings in the app's app/web.config connectionStrings section</returns>
+        IDictionary<string, string> GetConnectionStrings();
+
+        /// <summary>
+        /// Get an <see cref="T:System.Dynamic.ExpandoObject"/> whose properties
+        /// are the connectionstrings in the connectionStrings section of the
+        /// app/web.config. By default this looks in the app/web.config's
+        /// connectionStrings section.
+        /// </summary>
+        /// <returns>Returns all the connectionstrings in the app's
+        /// app/web.config connectionStrings section as properties on an 
+        /// <see cref="T:System.Dynamic.ExpandoObject"/></returns>
+        ExpandoObject GetConnectionStringsDynamic();
+
+        /// <summary>
         /// Get an app setting entry by its key. By default this looks in the app/web.config's appSettings section.
         /// </summary>
         /// <param name="key">The key of the key-value entry to look for.</param>
         /// <returns>Returns the value of the key-value entry matching the key given and the current Environment Tag</returns>
         string GetAppSetting(string key);
+
+        /// <summary>
+        /// Get an <see cref="T:System.Collections.IDictionary"/>{TKey, TValue} of all app settings.
+        ///  By default this looks in the app/web.config's appSettings section.
+        /// </summary>
+        /// <returns>Returns all the settings in the app's app/web.config appSettings section</returns>
+        IDictionary<string, string> GetAppSettings();
+
+        /// <summary>
+        /// Get an <see cref="T:System.Dynamic.ExpandoObject"/> whose properties
+        /// are the settings in the appSettings section of the app/web.config.
+        /// By default this looks in the app/web.config's appSettings section.
+        /// </summary>
+        /// <returns>Returns all the settings in the app's app/web.config
+        /// appSettings section as properties on an 
+        /// <see cref="T:System.Dynamic.ExpandoObject"/></returns>
+        ExpandoObject GetAppSettingsDynamic();
 
         /// <summary>
         /// Get the value in a key-value collection matching the key given. Please provide the functionality for retrieving the key-value collection.  

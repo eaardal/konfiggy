@@ -8,6 +8,10 @@ using KonfiggyFramework.TagStrategies;
 
 namespace KonfiggyFramework
 {
+    using System.Dynamic;
+
+    using KonfiggyFramework.Helpers;
+
     /// <summary>
     /// The main entry point for using Konfiggy.
     /// </summary>
@@ -55,6 +59,34 @@ namespace KonfiggyFramework
         }
 
         /// <summary>
+        /// Get an <see cref="T:System.Collections.IDictionary"/>{TKey, TValue} of all connection strings.
+        ///  By default this looks in the app/web.config's connectionStrings section.
+        /// </summary>
+        /// <returns>Returns all the settings in the app's app/web.config connectionStrings section</returns>
+        public IDictionary<string, string> GetConnectionStrings()
+        {
+            _keyValueRetrievalStrategy = new ConnectionStringsRetrievalStrategy();
+
+            return _keyValueRetrievalStrategy.GetKeyValueCollection(ConfigurationKeeper);
+        }
+
+        /// <summary>
+        /// Get an <see cref="T:System.Dynamic.ExpandoObject"/> whose properties
+        /// are the connectionstrings in the connectionStrings section of the
+        /// app/web.config. By default this looks in the app/web.config's
+        /// connectionStrings section.
+        /// </summary>
+        /// <returns>Returns all the connectionstrings in the app's
+        /// app/web.config connectionStrings section as properties on an 
+        /// <see cref="T:System.Dynamic.ExpandoObject"/></returns>
+        public ExpandoObject GetConnectionStringsDynamic()
+        {
+            _keyValueRetrievalStrategy = new ConnectionStringsRetrievalStrategy();
+
+            return _keyValueRetrievalStrategy.GetKeyValueCollection(ConfigurationKeeper).ToExpando();
+        }
+
+        /// <summary>
         /// Get an app setting entry by its key. By default this looks in the app/web.config's appSettings section.
         /// </summary>
         /// <param name="key">The key of the key-value entry to look for.</param>
@@ -63,6 +95,33 @@ namespace KonfiggyFramework
         {
             _keyValueRetrievalStrategy = new AppSettingsRetrievalStrategy();
             return GetValue(key);
+        }
+
+        /// <summary>
+        /// Get an <see cref="T:System.Collections.IDictionary"/>{TKey, TValue} of all app settings.
+        ///  By default this looks in the app/web.config's appSettings section.
+        /// </summary>
+        /// <returns>Returns all the settings in the app's app/web.config appSettings section</returns>
+        public IDictionary<string, string> GetAppSettings()
+        {
+            _keyValueRetrievalStrategy = new AppSettingsRetrievalStrategy();
+
+            return _keyValueRetrievalStrategy.GetKeyValueCollection(ConfigurationKeeper);
+        }
+
+        /// <summary>
+        /// Get an <see cref="T:System.Dynamic.ExpandoObject"/> whose properties
+        /// are the settings in the appSettings section of the app/web.config.
+        /// By default this looks in the app/web.config's appSettings section.
+        /// </summary>
+        /// <returns>Returns all the settings in the app's app/web.config
+        /// appSettings section as properties on an 
+        /// <see cref="T:System.Dynamic.ExpandoObject"/></returns>
+        public ExpandoObject GetAppSettingsDynamic()
+        {
+            _keyValueRetrievalStrategy = new AppSettingsRetrievalStrategy();
+
+            return _keyValueRetrievalStrategy.GetKeyValueCollection(ConfigurationKeeper).ToExpando();
         }
 
         /// <summary>
