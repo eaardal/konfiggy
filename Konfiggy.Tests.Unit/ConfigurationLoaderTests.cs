@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.SymbolStore;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,6 +73,9 @@ namespace Konfiggy.Tests.Unit
             };
 
             _fixture.ConfigurationKeeper.Setup(x => x.GetSection("appSettings")).Returns(dict);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(0).Key.ToLower())).Returns(dict.ElementAt(0).Value);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(1).Key.ToLower())).Returns(dict.ElementAt(1).Value);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(2).Key.ToLower())).Returns(dict.ElementAt(2).Value);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig>();
 
@@ -92,6 +97,9 @@ namespace Konfiggy.Tests.Unit
             };
 
             _fixture.ConfigurationKeeper.Setup(x => x.GetSection("appSettings")).Returns(dict);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(0).Key.ToLower())).Returns(dict.ElementAt(0).Value);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(1).Key.ToLower())).Returns(dict.ElementAt(1).Value);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(2).Key.ToLower())).Returns(dict.ElementAt(2).Value);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig>();
 
@@ -113,6 +121,9 @@ namespace Konfiggy.Tests.Unit
             };
 
             _fixture.ConfigurationKeeper.Setup(x => x.GetSection("appSettings")).Returns(dict);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(0).Key.ToLower())).Returns(dict.ElementAt(0).Value);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(1).Key.ToLower())).Returns(dict.ElementAt(1).Value);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(2).Key.ToLower())).Returns(dict.ElementAt(2).Value);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig>();
 
@@ -134,6 +145,9 @@ namespace Konfiggy.Tests.Unit
             };
 
             _fixture.ConfigurationKeeper.Setup(x => x.GetSection("appSettings")).Returns(dict);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(0).Key.ToLower())).Returns(dict.ElementAt(0).Value);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(1).Key.ToLower())).Returns(dict.ElementAt(1).Value);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(2).Key.ToLower())).Returns(dict.ElementAt(2).Value);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig2>();
 
@@ -155,6 +169,9 @@ namespace Konfiggy.Tests.Unit
             };
 
             _fixture.ConfigurationKeeper.Setup(x => x.GetSection("appSettings")).Returns(dict);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(0).Key.ToLower())).Returns(dict.ElementAt(0).Value);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(1).Key.ToLower())).Returns(dict.ElementAt(1).Value);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(2).Key.ToLower())).Returns(dict.ElementAt(2).Value);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig2>();
 
@@ -176,6 +193,9 @@ namespace Konfiggy.Tests.Unit
             };
 
             _fixture.ConfigurationKeeper.Setup(x => x.GetSection("appSettings")).Returns(dict);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(0).Key.ToLower())).Returns(dict.ElementAt(0).Value);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(1).Key.ToLower())).Returns(dict.ElementAt(1).Value);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(2).Key.ToLower())).Returns(dict.ElementAt(2).Value);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig3>();
 
@@ -193,18 +213,26 @@ namespace Konfiggy.Tests.Unit
             {
                 {"Key1", "123"},
                 {"Key2", "1,4"},
-                {"Key3", "4234234"},
+                {"Key3", "4234,234"},
             };
 
             _fixture.ConfigurationKeeper.Setup(x => x.GetSection("appSettings")).Returns(dict);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(0).Key.ToLower())).Returns(dict.ElementAt(0).Value);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(1).Key.ToLower())).Returns(dict.ElementAt(1).Value);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(2).Key.ToLower())).Returns(dict.ElementAt(2).Value);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig4>();
 
             var config = sut.WithAppSettings().Load();
             
             Assert.AreEqual(int.Parse(dict.ElementAt(0).Value), config.Key1);
-            Assert.AreEqual(double.Parse(dict.ElementAt(1).Value), config.Key2);
-            Assert.AreEqual(double.Parse(dict.ElementAt(2).Value), config.Key3);
+            Assert.AreEqual(ConvertType<double>(dict.ElementAt(1).Value, TypeCode.Double), config.Key2);
+            Assert.AreEqual(ConvertType<double>(dict.ElementAt(2).Value, TypeCode.Double), config.Key3);
+        }
+
+        private T ConvertType<T>(string val, TypeCode typeCode)
+        {
+            return (T) Convert.ChangeType(val, TypeCode.Double, CultureInfo.InvariantCulture);
         }
 
         [Test]
@@ -213,11 +241,14 @@ namespace Konfiggy.Tests.Unit
             var dict = new Dictionary<string, string>
             {
                 {"Key1", "foo"},
-                {"Key2", "14"},
-                {"Key3", "true"}
+                {"Key2", "123"},
+                {"Key3", "true"},
             };
 
             _fixture.ConfigurationKeeper.Setup(x => x.GetSection("appSettings")).Returns(dict);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(0).Key.ToLower())).Returns(dict.ElementAt(0).Value);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(1).Key.ToLower())).Returns(dict.ElementAt(1).Value);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(2).Key.ToLower())).Returns(dict.ElementAt(2).Value);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig5>();
 
@@ -237,6 +268,7 @@ namespace Konfiggy.Tests.Unit
             };
 
             _fixture.ConfigurationKeeper.Setup(x => x.GetSection("appSettings")).Returns(dict);
+            _fixture.Konfiggy.Setup(x => x.GetAppSetting(dict.ElementAt(0).Key.ToLower())).Returns(dict.ElementAt(0).Value);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig6>();
 
@@ -264,7 +296,7 @@ namespace Konfiggy.Tests.Unit
 
             sut.WithConnectionStrings();
 
-            _fixture.Konfiggy.Verify(x => x.GetConnectionString(It.IsAny<string>()), Times.Once);
+            _fixture.Konfiggy.Verify(x => x.GetConnectionString(It.IsAny<string>()));
         }
 
         [Test]
@@ -278,6 +310,9 @@ namespace Konfiggy.Tests.Unit
             };
 
             _fixture.ConfigurationKeeper.Setup(x => x.GetSection("connectionStrings")).Returns(dict);
+            _fixture.Konfiggy.Setup(x => x.GetConnectionString(dict.ElementAt(0).Key.ToLower())).Returns(dict.ElementAt(0).Value);
+            _fixture.Konfiggy.Setup(x => x.GetConnectionString(dict.ElementAt(1).Key.ToLower())).Returns(dict.ElementAt(1).Value);
+            _fixture.Konfiggy.Setup(x => x.GetConnectionString(dict.ElementAt(2).Key.ToLower())).Returns(dict.ElementAt(2).Value);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig>();
 
@@ -299,6 +334,9 @@ namespace Konfiggy.Tests.Unit
             };
 
             _fixture.ConfigurationKeeper.Setup(x => x.GetSection("connectionStrings")).Returns(dict);
+            _fixture.Konfiggy.Setup(x => x.GetConnectionString(dict.ElementAt(0).Key.ToLower())).Returns(dict.ElementAt(0).Value);
+            _fixture.Konfiggy.Setup(x => x.GetConnectionString(dict.ElementAt(1).Key.ToLower())).Returns(dict.ElementAt(1).Value);
+            _fixture.Konfiggy.Setup(x => x.GetConnectionString(dict.ElementAt(2).Key.ToLower())).Returns(dict.ElementAt(2).Value);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig>();
 
@@ -320,6 +358,9 @@ namespace Konfiggy.Tests.Unit
             };
 
             _fixture.ConfigurationKeeper.Setup(x => x.GetSection("connectionStrings")).Returns(dict);
+            _fixture.Konfiggy.Setup(x => x.GetConnectionString(dict.ElementAt(0).Key.ToLower())).Returns(dict.ElementAt(0).Value);
+            _fixture.Konfiggy.Setup(x => x.GetConnectionString(dict.ElementAt(1).Key.ToLower())).Returns(dict.ElementAt(1).Value);
+            _fixture.Konfiggy.Setup(x => x.GetConnectionString(dict.ElementAt(2).Key.ToLower())).Returns(dict.ElementAt(2).Value);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig>();
 
@@ -341,6 +382,9 @@ namespace Konfiggy.Tests.Unit
             };
 
             _fixture.ConfigurationKeeper.Setup(x => x.GetSection("connectionStrings")).Returns(dict);
+            _fixture.Konfiggy.Setup(x => x.GetConnectionString(dict.ElementAt(0).Key.ToLower())).Returns(dict.ElementAt(0).Value);
+            _fixture.Konfiggy.Setup(x => x.GetConnectionString(dict.ElementAt(1).Key.ToLower())).Returns(dict.ElementAt(1).Value);
+            _fixture.Konfiggy.Setup(x => x.GetConnectionString(dict.ElementAt(2).Key.ToLower())).Returns(dict.ElementAt(2).Value);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig2>();
 
@@ -362,6 +406,9 @@ namespace Konfiggy.Tests.Unit
             };
 
             _fixture.ConfigurationKeeper.Setup(x => x.GetSection("connectionStrings")).Returns(dict);
+            _fixture.Konfiggy.Setup(x => x.GetConnectionString(dict.ElementAt(0).Key.ToLower())).Returns(dict.ElementAt(0).Value);
+            _fixture.Konfiggy.Setup(x => x.GetConnectionString(dict.ElementAt(1).Key.ToLower())).Returns(dict.ElementAt(1).Value);
+            _fixture.Konfiggy.Setup(x => x.GetConnectionString(dict.ElementAt(2).Key.ToLower())).Returns(dict.ElementAt(2).Value);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig2>();
 
@@ -383,6 +430,9 @@ namespace Konfiggy.Tests.Unit
             };
 
             _fixture.ConfigurationKeeper.Setup(x => x.GetSection("connectionStrings")).Returns(dict);
+            _fixture.Konfiggy.Setup(x => x.GetConnectionString(dict.ElementAt(0).Key.ToLower())).Returns(dict.ElementAt(0).Value);
+            _fixture.Konfiggy.Setup(x => x.GetConnectionString(dict.ElementAt(1).Key.ToLower())).Returns(dict.ElementAt(1).Value);
+            _fixture.Konfiggy.Setup(x => x.GetConnectionString(dict.ElementAt(2).Key.ToLower())).Returns(dict.ElementAt(2).Value);
 
             var sut = _fixture.CreateSut<ConfigurationLoaderFixture.TestConfig3>();
 

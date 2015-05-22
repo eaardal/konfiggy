@@ -48,7 +48,7 @@ namespace KonfiggyFramework
                     {
                         if (!string.IsNullOrEmpty(val))
                         {
-                            property.SetValue(_config, Convert.ChangeType(val, property.PropertyType));
+                            property.SetValue(_config, Convert.ChangeType(val, property.PropertyType, culture));
                         }
                     }
                 }
