@@ -56,6 +56,7 @@
     <Compile Include="Exceptions\KonfiggyIdentifierNotSetException.cs" />
     <Compile Include="Exceptions\KonfiggyConfigurationKeeperNotSetException.cs" />
     <Compile Include="Exceptions\KonfiggyEnvironmentNotSetException.cs" />
+    <Compile Include="Exceptions\KonfiggyInvalidConfigValueTypeException.cs" />
     <Compile Include="Exceptions\KonfiggyServerNamesMapNotSetException.cs" />
     <Compile Include="Exceptions\KonfiggyTagStrategyNotSet.cs" />
     <Compile Include="Exceptions\KonfiggyUnmappableConfigValueException.cs" />

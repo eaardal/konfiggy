@@ -12,5 +12,17 @@ namespace Konfiggy.Tests.Unit.SettingsTests
         {
             Assert.AreSame(CultureInfo.InvariantCulture, KonfiggySettings.Culture);
         }
+
+        [Test]
+        public void ConfigListValueSeparator()
+        {
+            Assert.AreEqual(';', KonfiggySettings.ConfigListValueSeparator);
+        }
+
+        [Test]
+        public void ConfigDictionarySeparator()
+        {
+            Assert.AreEqual(':', KonfiggySettings.ConfigDictionarySeparator);
+        }
     }
 }

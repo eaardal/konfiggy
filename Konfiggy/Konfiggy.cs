@@ -95,6 +95,56 @@ namespace KonfiggyFramework
         }
 
         /// <summary>
+        /// Get an app setting entry by its key. By default this looks in the app/web.config's appSettings section.
+        /// </summary>
+        /// <param name="key">The key of the key-value entry to look for.</param>
+        /// <param name="fallbackValue">Value to use if no value is found in app/web.config</param>
+        /// <returns>Returns the value of the key-value entry matching the key given and the current Environment Tag</returns>
+        public string GetAppSetting(string key, string fallbackValue)
+        {
+            _keyValueRetrievalStrategy = new AppSettingsRetrievalStrategy();
+
+            try
+            {
+                return GetValue(key);
+            }
+            catch (Exception)
+            {
+                return fallbackValue;
+            }
+        }
+
+        /// <summary>
+        /// Get an app setting entry by its key. By default this looks in the app/web.config's appSettings section.
+        /// </summary>
+        /// <param name="key">The key of the key-value entry to look for.</param>
+        /// <returns>Returns the value of the key-value entry matching the key given and the current Environment Tag</returns>
+        public T GetAppSetting<T>(string key)
+        {
+            var value = GetAppSetting(key);
+            return Converters.Convert<T>(value);
+        }
+
+        /// <summary>
+        /// Get an app setting entry by its key. By default this looks in the app/web.config's appSettings section.
+        /// </summary>
+        /// <param name="key">The key of the key-value entry to look for.</param>
+        /// <param name="fallbackValue">Value to use if no value is found in app/web.config</param>
+        /// <returns>Returns the value of the key-value entry matching the key given and the current Environment Tag</returns>
+        public T GetAppSetting<T>(string key, T fallbackValue)
+        {
+            try
+            {
+                var value = GetAppSetting(key);
+                return Converters.Convert<T>(value);
+            }
+            catch (Exception)
+            {
+                return fallbackValue;
+            }
+        }
+
+        /// <summary>
         /// Get an <see cref="T:System.Collections.IDictionary"/>{TKey, TValue} of all app settings.
         ///  By default this looks in the app/web.config's appSettings section.
         /// </summary>

@@ -123,6 +123,102 @@ namespace Konfiggy.Tests.Unit
 
         #endregion
 
+        #region GetAppSettings<T> Method
+
+        [Test]
+        public void GetAppSettings_ReturnInts()
+        {
+            var appSettings = new NameValueCollection
+            {
+                {"local.key1", "101"},
+                {"dev.key1", "4000"}
+            };
+
+            var tagStrat = new Mock<IEnvironmentTagStrategy>();
+            tagStrat.Setup(ctx => ctx.GetEnvironmentTag()).Returns("Local");
+
+            var config = new Mock<IConfigurationKeeper>();
+            config.Setup(ctx => ctx.GetSection("appSettings")).Returns(appSettings);
+
+            _konfiggy.EnvironmentTagStrategy = tagStrat.Object;
+            _konfiggy.ConfigurationKeeper = config.Object;
+
+            int result = _konfiggy.GetAppSetting<int>("key1");
+
+            Assert.AreEqual(101, result);
+        }
+
+        [Test]
+        public void GetAppSettings_ReturnBools()
+        {
+            var appSettings = new NameValueCollection
+            {
+                {"local.key1", "true"},
+                {"dev.key1", "false"}
+            };
+
+            var tagStrat = new Mock<IEnvironmentTagStrategy>();
+            tagStrat.Setup(ctx => ctx.GetEnvironmentTag()).Returns("Local");
+
+            var config = new Mock<IConfigurationKeeper>();
+            config.Setup(ctx => ctx.GetSection("appSettings")).Returns(appSettings);
+
+            _konfiggy.EnvironmentTagStrategy = tagStrat.Object;
+            _konfiggy.ConfigurationKeeper = config.Object;
+
+            bool result = _konfiggy.GetAppSetting<bool>("key1");
+
+            Assert.AreEqual(true, result);
+        }
+
+        [Test]
+        public void GetAppSettings_ReturnDoubles()
+        {
+            var appSettings = new NameValueCollection
+            {
+                {"local.key1", "101.423"},
+                {"dev.key1", "4000.12"}
+            };
+
+            var tagStrat = new Mock<IEnvironmentTagStrategy>();
+            tagStrat.Setup(ctx => ctx.GetEnvironmentTag()).Returns("Local");
+
+            var config = new Mock<IConfigurationKeeper>();
+            config.Setup(ctx => ctx.GetSection("appSettings")).Returns(appSettings);
+
+            _konfiggy.EnvironmentTagStrategy = tagStrat.Object;
+            _konfiggy.ConfigurationKeeper = config.Object;
+
+            double result = _konfiggy.GetAppSetting<double>("key1");
+
+            Assert.AreEqual(101.423, result);
+        }
+
+        [Test]
+        public void GetAppSettings_ReturnChars()
+        {
+            var appSettings = new NameValueCollection
+            {
+                {"local.key1", "a"},
+                {"dev.key1", "b"}
+            };
+
+            var tagStrat = new Mock<IEnvironmentTagStrategy>();
+            tagStrat.Setup(ctx => ctx.GetEnvironmentTag()).Returns("Local");
+
+            var config = new Mock<IConfigurationKeeper>();
+            config.Setup(ctx => ctx.GetSection("appSettings")).Returns(appSettings);
+
+            _konfiggy.EnvironmentTagStrategy = tagStrat.Object;
+            _konfiggy.ConfigurationKeeper = config.Object;
+
+            char result = _konfiggy.GetAppSetting<char>("key1");
+
+            Assert.AreEqual('a', result);
+        }
+
+        #endregion
+
         #region GetAppSettingsDynamic Method
 
         [Test]

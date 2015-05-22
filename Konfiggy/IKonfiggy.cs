@@ -56,11 +56,34 @@ namespace KonfiggyFramework
         string GetAppSetting(string key);
 
         /// <summary>
+        /// Get an app setting entry by its key. By default this looks in the app/web.config's appSettings section.
+        /// </summary>
+        /// <param name="key">The key of the key-value entry to look for.</param>
+        /// <returns>Returns the value of the key-value entry matching the key given and the current Environment Tag</returns>
+        T GetAppSetting<T>(string key);
+
+        /// <summary>
         /// Get an <see cref="T:System.Collections.IDictionary"/>{TKey, TValue} of all app settings.
         ///  By default this looks in the app/web.config's appSettings section.
         /// </summary>
         /// <returns>Returns all the settings in the app's app/web.config appSettings section</returns>
         IDictionary<string, string> GetAppSettings();
+
+        /// <summary>
+        /// Get an app setting entry by its key. By default this looks in the app/web.config's appSettings section.
+        /// </summary>
+        /// <param name="key">The key of the key-value entry to look for.</param>
+        /// <param name="fallbackValue">Value to use if no value is found in app/web.config</param>
+        /// <returns>Returns the value of the key-value entry matching the key given and the current Environment Tag</returns>
+        string GetAppSetting(string key, string fallbackValue);
+
+        /// <summary>
+        /// Get an app setting entry by its key. By default this looks in the app/web.config's appSettings section.
+        /// </summary>
+        /// <param name="key">The key of the key-value entry to look for.</param>
+        /// <param name="fallbackValue">Value to use if no value is found in app/web.config</param>
+        /// <returns>Returns the value of the key-value entry matching the key given and the current Environment Tag</returns>
+        T GetAppSetting<T>(string key, T fallbackValue);
 
         /// <summary>
         /// Get an <see cref="T:System.Dynamic.ExpandoObject"/> whose properties

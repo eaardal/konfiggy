@@ -1,4 +1,7 @@
-﻿namespace KonfiggyFramework.Helpers
+﻿using KonfiggyFramework.Exceptions;
+using KonfiggyFramework.Settings;
+
+namespace KonfiggyFramework.Helpers
 {
     using System;
     using System.Collections.Generic;
@@ -83,6 +86,21 @@
             var dictionary = new Dictionary<string, string>();
             fillDictionaryAction(dictionary);
             return dictionary;
+        }
+
+        public static T Convert<T>(object value)
+        {
+            try
+            {
+                if (value is T)
+                    return (T) value;
+
+                return (T) System.Convert.ChangeType(value, typeof (T), KonfiggySettings.Culture);
+            }
+            catch (Exception ex)
+            {
+                throw new KonfiggyInvalidConfigValueTypeException("Could not cast " + value + " to " + typeof(T).FullName, ex);
+            }
         }
     }
 }

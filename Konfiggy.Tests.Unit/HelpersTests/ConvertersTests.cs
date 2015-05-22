@@ -111,6 +111,50 @@ namespace Konfiggy.Tests.Unit.HelpersTests
             Assert.AreEqual(nameValues[2], dynamicDict.CFoo);
         }
 
+        [Test]
+        public void Convert_ConvertsStringToInt()
+        {
+            const string value = "123";
+            const int expected = 123;
+
+            var result = Converters.Convert<int>(value);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void Convert_ConvertsStringToDouble()
+        {
+            const string value = "123.312";
+            const double expected = 123.312;
+
+            var result = Converters.Convert<double>(value);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void Convert_ConvertsStringToBool()
+        {
+            const string value = "true";
+            const bool expected = true;
+
+            var result = Converters.Convert<bool>(value);
+
+            Assert.AreEqual(expected, result);
+        }
+        
+        [Test]
+        public void Convert_ConvertsStringToChar()
+        {
+            const string value = "a";
+            const char expected = 'a';
+
+            var result = Converters.Convert<char>(value);
+
+            Assert.AreEqual(expected, result);
+        }
+
         private void PrintProperties(dynamic obj)
         {
             foreach (var prop in obj)

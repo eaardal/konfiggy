@@ -12,7 +12,7 @@ namespace Konfiggy.ClientTestApp
         static void Main(string[] args)
         {
             IKonfiggy konfiggy = new KonfiggyFramework.Konfiggy();
-           
+            
             DemoDynamic(konfiggy);
             Console.WriteLine();
 
