@@ -1,4 +1,5 @@
 using System;
+using KonfiggyFramework.Helpers;
 
 namespace KonfiggyFramework
 {

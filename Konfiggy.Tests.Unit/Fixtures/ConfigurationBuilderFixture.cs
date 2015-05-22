@@ -1,4 +1,5 @@
 using KonfiggyFramework;
+using KonfiggyFramework.Helpers;
 
 namespace Konfiggy.Tests.Unit.Fixtures
 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using KonfiggyFramework.Exceptions;
+using KonfiggyFramework.Helpers;
 using KonfiggyFramework.Settings;
 
 namespace KonfiggyFramework

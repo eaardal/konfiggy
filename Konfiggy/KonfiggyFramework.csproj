@@ -44,7 +44,6 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigurationBuilder.cs" />
     <Compile Include="ConfigurationKeeper.cs" />
     <Compile Include="ConfigurationLoader.cs" />
     <Compile Include="Config\ConfigSection.cs" />
@@ -60,6 +59,7 @@
     <Compile Include="Exceptions\KonfiggyServerNamesMapNotSetException.cs" />
     <Compile Include="Exceptions\KonfiggyTagStrategyNotSet.cs" />
     <Compile Include="Exceptions\KonfiggyUnmappableConfigValueException.cs" />
+    <Compile Include="Helpers\ConfigurationBuilder.cs" />
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Helpers\FileHelpers.cs" />
     <Compile Include="Helpers\TextFileHelpers.cs" />
