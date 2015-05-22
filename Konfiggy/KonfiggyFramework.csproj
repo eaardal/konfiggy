@@ -44,6 +44,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationBuilder.cs" />
     <Compile Include="ConfigurationKeeper.cs" />
     <Compile Include="ConfigurationLoader.cs" />
     <Compile Include="Config\ConfigSection.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Settings\DefaultFileSettings.cs" />
     <Compile Include="Settings\IFileSettings.cs" />
     <Compile Include="Settings\KonfiggyFileType.cs" />
+    <Compile Include="Settings\KonfiggySettings.cs" />
     <Compile Include="SystemEnvironment.cs" />
     <Compile Include="TagStrategies\CodeTagStrategy.cs" />
     <Compile Include="TagStrategies\ConfigFileTagStrategy.cs" />
