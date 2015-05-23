@@ -60,6 +60,7 @@
     <Compile Include="Exceptions\KonfiggyServerNamesMapNotSetException.cs" />
     <Compile Include="Exceptions\KonfiggyTagStrategyNotSet.cs" />
     <Compile Include="Exceptions\KonfiggyUnmappableConfigValueException.cs" />
+    <Compile Include="Exceptions\KonfiggyValueNotFoundForKeyException.cs" />
     <Compile Include="Helpers\ConfigurationBuilder.cs" />
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Helpers\TypeExtensions.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="TagStrategies\EnvironmentVariableTagStrategy.cs" />
     <Compile Include="TagStrategies\FileTagStrategy.cs" />
     <Compile Include="TagStrategies\MachineNameTagStrategy.cs" />
+    <Compile Include="TagStrategies\NoEnvironmentTagStrategy.cs" />
     <Compile Include="TagStrategies\TextFileTagStrategy.cs" />
     <Compile Include="TagStrategies\IEnvironmentTagStrategy.cs" />
   </ItemGroup>

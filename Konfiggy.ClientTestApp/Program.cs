@@ -13,10 +13,20 @@ namespace Konfiggy.ClientTestApp
         {
             IKonfiggy konfiggy = new KonfiggyFramework.Konfiggy();
             
-            DemoDynamic(konfiggy);
-            
-            DemoPopulateConfig(konfiggy);
-            
+            var config = konfiggy.PopulateConfig<Config>()
+                .WithAppSettings(c => c.Map(x => x.Testjah, "testing"))
+                .WithConnectionStrings(c => c.Map(x => x.Test, "testing"))
+                .Populate();
+
+            Console.WriteLine(config.Test);
+            Console.WriteLine(config.Testjah);
+
+            Console.ReadLine();
+
+            //DemoDynamic(konfiggy);
+
+            //DemoPopulateConfig(konfiggy);
+
             Console.ReadLine();
         }
 
@@ -69,6 +79,12 @@ namespace Konfiggy.ClientTestApp
         public string MySetting { get; set; }
         public string Setting { get; set; }
         public string MyConnString { get; set; }
+    }
+
+    internal class Config
+    {
+        public string Test { get; set; }
+        public string Testjah { get; set; }
     }
 
     class CustomKeyValueRetrievalStrategy : IKeyValueRetrievalStrategy

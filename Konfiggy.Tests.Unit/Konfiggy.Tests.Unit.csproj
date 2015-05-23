@@ -71,6 +71,7 @@
     <Compile Include="TagStrategiesTests\ConfigFileTagStrategyTests.cs" />
     <Compile Include="TagStrategiesTests\EnvironmentVariableTagStrategyTests.cs" />
     <Compile Include="TagStrategiesTests\MachineNameTagStrategyTests.cs" />
+    <Compile Include="TagStrategiesTests\NoEnvironmentTagStrategyTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

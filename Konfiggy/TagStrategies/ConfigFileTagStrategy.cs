@@ -1,4 +1,5 @@
 ﻿using KonfiggyFramework.Config;
+using KonfiggyFramework.Exceptions;
 
 namespace KonfiggyFramework.TagStrategies
 {
@@ -21,6 +22,9 @@ namespace KonfiggyFramework.TagStrategies
         {
             if (ConfigSection == null) 
                 ConfigSection = Config.ConfigSection.GetConfig();
+
+            if (ConfigSection == null)
+                throw new KonfiggyConfigSectionNotSetException("Expected a konfiggy-section to be defined in app/web.config when using the environment tag strategy " + GetType().FullName);
 
             return ConfigSection.EnvironmentTag.Value;
         }

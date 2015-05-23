@@ -104,6 +104,22 @@ namespace KonfiggyFramework
         /// <returns>Returns the value of the key-value entry matching the key given and the current Environment Tag.</returns>
         string GetCustom(string key, IKeyValueRetrievalStrategy keyValueRetrievalStrategy);
 
+        /// <summary>
+        /// Get a connection string by its name. By default this looks in the app/web.config's connectionStrings section.
+        /// </summary>
+        /// <param name="name">The name of the connection string to look for</param>
+        /// <param name="fallbackValue">Value to use if no value is found in app/web.config</param>
+        /// <returns>Returns the connection string found matching the name and the current Environment Tag</returns>
+        string GetConnectionString(string name, string fallbackValue);
+
+        /// <summary>
+        /// Populates the given POCO type with values from matching appSetting/connectionString keys.  
+        /// E.x.: the appSetting with key "foo" will match the property "Foo" with public get/set.
+        /// The POCO's properties can be any primitive type such as string, int, double, bool, etc.
+        /// A semi-colon separated value ("foo;bar;hello;world") maps to a IEnumerable of string
+        /// </summary>
+        /// <typeparam name="T">The POCO type to map settings to. Its properties must be public get/set and match the type of content the appSetting-value holds</typeparam>
+        /// <returns>Returns the <see cref="IConfigurationLoader{T}"/> instance which acts like a builder</returns>
         IConfigurationLoader<T> PopulateConfig<T>() where T : new();
     }
 }

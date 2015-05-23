@@ -22,10 +22,16 @@ namespace KonfiggyFramework.TagStrategies
         /// Createas a new instance using the default <see cref="KonfiggyFramework.SystemEnvironment"/> implementation for the <see cref="SystemEnvironment"/> property
         /// and "Konfiggy" as the default <see cref="KonfiggyIdentifier"/> value
         /// </summary>
-        public EnvironmentVariableTagStrategy()
+        public EnvironmentVariableTagStrategy() : this("Konfiggy")
         {
+            
+        }
+
+        public EnvironmentVariableTagStrategy(string konfiggyIdentifier)
+        {
+            if (konfiggyIdentifier == null) throw new ArgumentNullException("konfiggyIdentifier");
+            KonfiggyIdentifier = konfiggyIdentifier;
             SystemEnvironment = new SystemEnvironment();
-            KonfiggyIdentifier = "Konfiggy";
         }
 
         /// <summary>

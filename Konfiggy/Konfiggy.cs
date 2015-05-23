@@ -41,7 +41,7 @@ namespace KonfiggyFramework
         public Konfiggy()
         {
             ConfigurationKeeper = new ConfigurationKeeper();
-            EnvironmentTagStrategy = new ConfigFileTagStrategy();
+            EnvironmentTagStrategy = new NoEnvironmentTagStrategy();
         }
 
         /// <summary>
@@ -53,6 +53,26 @@ namespace KonfiggyFramework
         {
             _keyValueRetrievalStrategy = new ConnectionStringsRetrievalStrategy();
             return GetValue(name);
+        }
+
+        /// <summary>
+        /// Get a connection string by its name. By default this looks in the app/web.config's connectionStrings section.
+        /// </summary>
+        /// <param name="name">The name of the connection string to look for</param>
+        /// <param name="fallbackValue">Value to use if no value is found in app/web.config</param>
+        /// <returns>Returns the connection string found matching the name and the current Environment Tag</returns>
+        public string GetConnectionString(string name, string fallbackValue)
+        {
+            _keyValueRetrievalStrategy = new ConnectionStringsRetrievalStrategy();
+
+            try
+            {
+                return GetValue(name);
+            }
+            catch (Exception)
+            {
+                return fallbackValue;
+            }
         }
 
         /// <summary>
@@ -184,6 +204,14 @@ namespace KonfiggyFramework
             return GetValue(key);
         }
 
+        /// <summary>
+        /// Populates the given POCO type with values from matching appSetting/connectionString keys.  
+        /// E.x.: the appSetting with key "foo" will match the property "Foo" with public get/set.
+        /// The POCO's properties can be any primitive type such as string, int, double, bool, etc.
+        /// A semi-colon separated value ("foo;bar;hello;world") maps to a IEnumerable of string
+        /// </summary>
+        /// <typeparam name="T">The POCO type to map settings to. Its properties must be public get/set and match the type of content the appSetting-value holds</typeparam>
+        /// <returns>Returns the <see cref="IConfigurationLoader{T}"/> instance which acts like a builder</returns>
         public IConfigurationLoader<T> PopulateConfig<T>() where T : new()
         {
             return new ConfigurationLoader<T>(this);
@@ -198,11 +226,14 @@ namespace KonfiggyFramework
 
             var dictionary = _keyValueRetrievalStrategy.GetKeyValueCollection(ConfigurationKeeper);
 
+            if (EnvironmentTagStrategy is NoEnvironmentTagStrategy)
+                return GetValueForKeyInCollection(key, dictionary);
+
             var environmentTag = EnvironmentTagStrategy.GetEnvironmentTag();
 
             if (String.IsNullOrEmpty(environmentTag))
                 throw new KonfiggyEnvironmentTagNotFoundException(
-                    "Could not find any Konfiggy environment tag with the IEnvironmentTagStrategy: " + EnvironmentTagStrategy.GetType().FullName);
+                    "Could not find any Konfiggy environment tag when using the IEnvironmentTagStrategy: " + EnvironmentTagStrategy.GetType().FullName);
 
             var completeKey = CreateCompleteKey(environmentTag, key);
             return GetValueForKeyInCollection(completeKey, dictionary);
@@ -232,19 +263,23 @@ namespace KonfiggyFramework
 
                 string value;
 
-                if (collection.Keys.Select(k => k.ToLower(culture)).Contains(keyLowerCase))
+                if (collection.Keys.Select(key => key.ToLower(culture)).Contains(keyLowerCase))
                 {
                     value = collection.Single(kvp => kvp.Key.ToLower(culture) == keyLowerCase).Value;
                 }
+                else if (keyLowerCase.Contains('.'))
+                {
+                    var key = keyLowerCase.Remove(0, keyLowerCase.IndexOf('.') + 1);
+                    value = collection.Single(k => k.Key.ToLower(culture) == key).Value;
+                }
                 else
                 {
-                    var key = fullKey.Remove(0, fullKey.IndexOf('.') + 1);
-                    value = collection[key];
+                    throw new KeyNotFoundException();
                 }
 
                 return value;
             }
-            catch (KeyNotFoundException ex)
+            catch (Exception ex)
             {
                 throw new KonfiggyKeyNotFoundException("Could not find any configuration entry in the name-value collection with the key " + fullKey, ex);
             }

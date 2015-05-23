@@ -38,7 +38,7 @@ namespace Konfiggy.Tests.Unit
         public void Constructor_SetsDefaultEnvironmentTagStrategy()
         {
             Assert.IsNotNull(_konfiggy.EnvironmentTagStrategy);
-            Assert.IsInstanceOf<ConfigFileTagStrategy>(_konfiggy.EnvironmentTagStrategy);
+            Assert.IsInstanceOf<NoEnvironmentTagStrategy>(_konfiggy.EnvironmentTagStrategy);
         }
 
         #endregion
@@ -119,6 +119,72 @@ namespace Konfiggy.Tests.Unit
             string result = _konfiggy.GetAppSetting("tEstVALue");
 
             Assert.AreEqual("LocalValue", result);
+        }
+
+        [TestCase("CommonTestValue", "CommonValue")]
+        [TestCase("Dev.TestValue", "DevValue")]
+        [TestCase("qa.TESTvalue", "QAValue")]
+        [TestCase("pROd.testvalue", "ProdValue")]
+        public void GetAppSettings_WhenTagStrategyIsNoEnvironmentTagStrategy_ReturnsValueForKey(string key, string expected)
+        {
+            var config = new Mock<IConfigurationKeeper>();
+            config.Setup(ctx => ctx.GetSection("appSettings")).Returns(GetFakeAppSettings());
+
+            _konfiggy.EnvironmentTagStrategy = new NoEnvironmentTagStrategy();
+            _konfiggy.ConfigurationKeeper = config.Object;
+
+            string result = _konfiggy.GetAppSetting(key);
+
+            Assert.AreEqual(expected, result);
+        }
+        
+        [Test]
+        public void GetAppSettings_WhenTagStrategyIsNoEnvironmentTagStrategy_AndKeyDoesNotExist_ThrowsExcepion()
+        {
+            var config = new Mock<IConfigurationKeeper>();
+            config.Setup(ctx => ctx.GetSection("appSettings")).Returns(GetFakeAppSettings());
+
+            _konfiggy.EnvironmentTagStrategy = new NoEnvironmentTagStrategy();
+            _konfiggy.ConfigurationKeeper = config.Object;
+            
+            Assert.Throws<KonfiggyKeyNotFoundException>(() => _konfiggy.GetAppSetting("nonexisting"));
+        }
+
+        #endregion
+
+        #region GetAppSetting With Fallback Value
+
+        [Test]
+        public void GetAppSetting_ReturnsFallbackValueOnException()
+        {
+            var config = new Mock<IConfigurationKeeper>();
+            config.Setup(ctx => ctx.GetSection("appSettings")).Throws<KonfiggyConfigurationKeeperNotSetException>();
+
+            _konfiggy.EnvironmentTagStrategy = new NoEnvironmentTagStrategy();
+            _konfiggy.ConfigurationKeeper = config.Object;
+
+            const string fallbackValue = "Default fallback value";
+            var result = _konfiggy.GetAppSetting("testvalue", fallbackValue);
+
+            Assert.AreEqual(fallbackValue, result);
+        }
+
+        [Test]
+        public void GetAppSetting_WhenNoKeyIsFound_ReturnsFallbackValue()
+        {
+            var tagStrat = new Mock<IEnvironmentTagStrategy>();
+            tagStrat.Setup(ctx => ctx.GetEnvironmentTag()).Returns("Local");
+
+            var config = new Mock<IConfigurationKeeper>();
+            config.Setup(ctx => ctx.GetSection("appSettings")).Returns(GetFakeAppSettings());
+
+            _konfiggy.EnvironmentTagStrategy = tagStrat.Object;
+            _konfiggy.ConfigurationKeeper = config.Object;
+
+            const string fallbackValue = "Default fallback value";
+            var result = _konfiggy.GetAppSetting("nonexistingkey", fallbackValue);
+
+            Assert.AreEqual(fallbackValue, result);
         }
 
         #endregion
@@ -305,6 +371,43 @@ namespace Konfiggy.Tests.Unit
 
             Assert.NotNull(result.ProdTestKey);
             Assert.AreEqual(connectionStrings["Prod.TestKey"].ConnectionString, result.ProdTestKey);
+        }
+
+        #endregion
+
+        #region GetConnectionString With Fallback Value
+
+        [Test]
+        public void GetConnectionString_ReturnsFallbackValueOnException()
+        {
+            var config = new Mock<IConfigurationKeeper>();
+            config.Setup(ctx => ctx.GetSection("appSettings")).Throws<KonfiggyConfigurationKeeperNotSetException>();
+
+            _konfiggy.EnvironmentTagStrategy = new NoEnvironmentTagStrategy();
+            _konfiggy.ConfigurationKeeper = config.Object;
+
+            const string fallbackValue = "Default fallback value";
+            var result = _konfiggy.GetConnectionString("testvalue", fallbackValue);
+
+            Assert.AreEqual(fallbackValue, result);
+        }
+
+        [Test]
+        public void GetConnectionString_WhenNoKeyIsFound_ReturnsFallbackValue()
+        {
+            var tagStrat = new Mock<IEnvironmentTagStrategy>();
+            tagStrat.Setup(ctx => ctx.GetEnvironmentTag()).Returns("Local");
+
+            var config = new Mock<IConfigurationKeeper>();
+            config.Setup(ctx => ctx.GetSection("appSettings")).Returns(GetFakeAppSettings());
+
+            _konfiggy.EnvironmentTagStrategy = tagStrat.Object;
+            _konfiggy.ConfigurationKeeper = config.Object;
+
+            const string fallbackValue = "Default fallback value";
+            var result = _konfiggy.GetAppSetting("nonexistingkey", fallbackValue);
+
+            Assert.AreEqual(fallbackValue, result);
         }
 
         #endregion

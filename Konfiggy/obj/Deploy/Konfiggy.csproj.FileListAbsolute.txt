@@ -1,4 +1,0 @@
-C:\SourceControl\Konfiggy\Konfiggy\bin\Deploy\Konfiggy.dll
-C:\SourceControl\Konfiggy\Konfiggy\bin\Deploy\Konfiggy.pdb
-C:\SourceControl\Konfiggy\Konfiggy\obj\Deploy\Konfiggy.dll
-C:\SourceControl\Konfiggy\Konfiggy\obj\Deploy\Konfiggy.pdb
