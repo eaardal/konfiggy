@@ -14,11 +14,9 @@ namespace Konfiggy.ClientTestApp
             IKonfiggy konfiggy = new KonfiggyFramework.Konfiggy();
             
             DemoDynamic(konfiggy);
-            Console.WriteLine();
-
+            
             DemoPopulateConfig(konfiggy);
-            Console.WriteLine();
-
+            
             Console.ReadLine();
         }
 
@@ -31,6 +29,8 @@ namespace Konfiggy.ClientTestApp
             Console.WriteLine("setting: " + config.Setting);
             Console.WriteLine("MyConnString: " + config.MyConnString);
             Console.WriteLine("MySetting: " + config.MySetting);
+
+            Console.WriteLine();
         }
 
         private static void DemoDynamic(IKonfiggy konfiggy)
@@ -48,6 +48,8 @@ namespace Konfiggy.ClientTestApp
 
             Console.WriteLine(connectionsDynamic.DevMyConnString);
             Console.WriteLine(connectionsDynamic.QAMyConnString);
+
+            Console.WriteLine();
         }
 
         private static IDictionary<string, string> CreateMachineNamesMap()
