@@ -28,6 +28,43 @@ IKonfiggy konfiggy = new Konfiggy(); // Or resolve from IoC...
 string myValue = konfiggy.GetAppSetting("mySetting");
 ```
 
+#### And also...
+
+With a POCO class like
+
+```csharp
+class Config
+{
+    public string MySetting { get; set; }
+    public string MyConnectionString { get; set; }
+}
+```
+
+And a app.config file like
+
+```xml
+<appSettings>
+  <add key="dev.mySetting" value="foo"/>
+</appSettings>
+<connectionStrings>
+  <add name="dev.myConnectionString" connectionString="bar"/>
+</connectionStrings>
+```
+You can automatically populate it with config data
+```csharp
+var config = konfiggy.PopulateConfig<Config>()
+                     .WithAppSettings()
+                     .WithConnectionStrings()
+                     .Populate();
+```
+Or map the properties manually if the names doesn't match exactly
+```csharp
+var config = konfiggy.PopulateConfig<Config>()
+                     .WithAppSettings(c => c.Map(x => x.MySetting, "someAppSettingKey"))
+                     .WithConnectionStrings(c => c.Map(x => x.MyConnectionString, "someConnectionStringName"))
+                     .Populate();
+```
+
 [More info in the Wiki](https://github.com/eaardal/Konfiggy/wiki/Getting-started) 
 
 Accepting all kinds of feedback, ideas and/or help :)
