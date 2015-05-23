@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationKeeper.cs" />
+    <Compile Include="ConfigurationLoader.cs" />
     <Compile Include="Config\ConfigSection.cs" />
     <Compile Include="Config\EnvironmentTagElement.cs" />
     <Compile Include="Config\IConfigSection.cs" />
@@ -55,12 +56,17 @@
     <Compile Include="Exceptions\KonfiggyIdentifierNotSetException.cs" />
     <Compile Include="Exceptions\KonfiggyConfigurationKeeperNotSetException.cs" />
     <Compile Include="Exceptions\KonfiggyEnvironmentNotSetException.cs" />
+    <Compile Include="Exceptions\KonfiggyInvalidConfigValueTypeException.cs" />
     <Compile Include="Exceptions\KonfiggyServerNamesMapNotSetException.cs" />
     <Compile Include="Exceptions\KonfiggyTagStrategyNotSet.cs" />
+    <Compile Include="Exceptions\KonfiggyUnmappableConfigValueException.cs" />
+    <Compile Include="Helpers\ConfigurationBuilder.cs" />
     <Compile Include="Helpers\Converters.cs" />
+    <Compile Include="Helpers\TypeExtensions.cs" />
     <Compile Include="Helpers\FileHelpers.cs" />
     <Compile Include="Helpers\TextFileHelpers.cs" />
     <Compile Include="IConfigurationKeeper.cs" />
+    <Compile Include="IConfigurationLoader.cs" />
     <Compile Include="IKonfiggy.cs" />
     <Compile Include="ISystemEnvironment.cs" />
     <Compile Include="KeyValueRetrievalStrategies\AppSettingsRetrievalStrategy.cs" />
@@ -73,6 +79,7 @@
     <Compile Include="Settings\DefaultFileSettings.cs" />
     <Compile Include="Settings\IFileSettings.cs" />
     <Compile Include="Settings\KonfiggyFileType.cs" />
+    <Compile Include="Settings\KonfiggySettings.cs" />
     <Compile Include="SystemEnvironment.cs" />
     <Compile Include="TagStrategies\CodeTagStrategy.cs" />
     <Compile Include="TagStrategies\ConfigFileTagStrategy.cs" />

@@ -51,6 +51,118 @@ namespace Konfiggy.Tests.Unit.HelpersTests
             Assert.AreEqual(nameValues[2], dictionary.ElementAt(2).Value);
         }
 
+        [Test]
+        public void ToExpando_ContainsExpectedKeyValueCount()
+        {
+            var nameValues = GetFakeNameValueCollection();
+
+            var dictionary = Converters.ConvertToDictionary(nameValues);
+            dynamic dynamicDict = dictionary.ToExpando();
+
+            var count = 0;
+            foreach (var property in dynamicDict)
+            {
+                count++;
+            }
+
+            Assert.AreEqual(3, count);
+        }
+
+        [Test]
+        public void ToExpando_ContainsExpectedKeyValues()
+        {
+            var nameValues = GetFakeNameValueCollection();
+
+            var dictionary = Converters.ConvertToDictionary(nameValues);
+            dynamic dynamicDict = dictionary.ToExpando();
+            
+            Assert.NotNull(dynamicDict.Name_1);
+            Assert.AreEqual(nameValues[0], dynamicDict.Name_1);
+
+            Assert.NotNull(dynamicDict.Name_2);
+            Assert.AreEqual(nameValues[1], dynamicDict.Name_2);
+
+            Assert.NotNull(dynamicDict.Name_3);
+            Assert.AreEqual(nameValues[2], dynamicDict.Name_3);
+        }
+
+        [Test]
+        public void ToExpando_RemovesDotInKeys()
+        {
+            var nameValues = new NameValueCollection
+            {
+                {"a.foo", "Value_1"},
+                {"b.foo", "Value_2"},
+                {"c.foo", "Value_3"},
+            };
+
+            var dictionary = Converters.ConvertToDictionary(nameValues);
+            dynamic dynamicDict = dictionary.ToExpando();
+
+            PrintProperties(dynamicDict);
+
+            Assert.NotNull(dynamicDict.AFoo);
+            Assert.AreEqual(nameValues[0], dynamicDict.AFoo);
+
+            Assert.NotNull(dynamicDict.BFoo);
+            Assert.AreEqual(nameValues[1], dynamicDict.BFoo);
+
+            Assert.NotNull(dynamicDict.CFoo);
+            Assert.AreEqual(nameValues[2], dynamicDict.CFoo);
+        }
+
+        [Test]
+        public void Convert_ConvertsStringToInt()
+        {
+            const string value = "123";
+            const int expected = 123;
+
+            var result = Converters.Convert<int>(value);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void Convert_ConvertsStringToDouble()
+        {
+            const string value = "123.312";
+            const double expected = 123.312;
+
+            var result = Converters.Convert<double>(value);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void Convert_ConvertsStringToBool()
+        {
+            const string value = "true";
+            const bool expected = true;
+
+            var result = Converters.Convert<bool>(value);
+
+            Assert.AreEqual(expected, result);
+        }
+        
+        [Test]
+        public void Convert_ConvertsStringToChar()
+        {
+            const string value = "a";
+            const char expected = 'a';
+
+            var result = Converters.Convert<char>(value);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        private void PrintProperties(dynamic obj)
+        {
+            foreach (var prop in obj)
+            {
+                Console.WriteLine(prop.Key + ": " + prop.Value);
+            }
+        }
+
         private NameValueCollection GetFakeNameValueCollection()
         {
             return new NameValueCollection

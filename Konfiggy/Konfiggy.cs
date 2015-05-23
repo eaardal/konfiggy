@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using KonfiggyFramework.Exceptions;
+using KonfiggyFramework.Helpers;
 using KonfiggyFramework.KeyValueRetrievalStrategies;
 using KonfiggyFramework.TagStrategies;
 
@@ -53,6 +56,34 @@ namespace KonfiggyFramework
         }
 
         /// <summary>
+        /// Get an <see cref="T:System.Collections.IDictionary"/>{TKey, TValue} of all connection strings.
+        ///  By default this looks in the app/web.config's connectionStrings section.
+        /// </summary>
+        /// <returns>Returns all the settings in the app's app/web.config connectionStrings section</returns>
+        public IDictionary<string, string> GetConnectionStrings()
+        {
+            _keyValueRetrievalStrategy = new ConnectionStringsRetrievalStrategy();
+
+            return _keyValueRetrievalStrategy.GetKeyValueCollection(ConfigurationKeeper);
+        }
+
+        /// <summary>
+        /// Get an <see cref="T:System.Dynamic.ExpandoObject"/> whose properties
+        /// are the connectionstrings in the connectionStrings section of the
+        /// app/web.config. By default this looks in the app/web.config's
+        /// connectionStrings section.
+        /// </summary>
+        /// <returns>Returns all the connectionstrings in the app's
+        /// app/web.config connectionStrings section as properties on an 
+        /// <see cref="T:System.Dynamic.ExpandoObject"/></returns>
+        public dynamic GetConnectionStringsDynamic()
+        {
+            _keyValueRetrievalStrategy = new ConnectionStringsRetrievalStrategy();
+
+            return _keyValueRetrievalStrategy.GetKeyValueCollection(ConfigurationKeeper).ToExpando();
+        }
+
+        /// <summary>
         /// Get an app setting entry by its key. By default this looks in the app/web.config's appSettings section.
         /// </summary>
         /// <param name="key">The key of the key-value entry to look for.</param>
@@ -61,6 +92,83 @@ namespace KonfiggyFramework
         {
             _keyValueRetrievalStrategy = new AppSettingsRetrievalStrategy();
             return GetValue(key);
+        }
+
+        /// <summary>
+        /// Get an app setting entry by its key. By default this looks in the app/web.config's appSettings section.
+        /// </summary>
+        /// <param name="key">The key of the key-value entry to look for.</param>
+        /// <param name="fallbackValue">Value to use if no value is found in app/web.config</param>
+        /// <returns>Returns the value of the key-value entry matching the key given and the current Environment Tag</returns>
+        public string GetAppSetting(string key, string fallbackValue)
+        {
+            _keyValueRetrievalStrategy = new AppSettingsRetrievalStrategy();
+
+            try
+            {
+                return GetValue(key);
+            }
+            catch (Exception)
+            {
+                return fallbackValue;
+            }
+        }
+
+        /// <summary>
+        /// Get an app setting entry by its key. By default this looks in the app/web.config's appSettings section.
+        /// </summary>
+        /// <param name="key">The key of the key-value entry to look for.</param>
+        /// <returns>Returns the value of the key-value entry matching the key given and the current Environment Tag</returns>
+        public T GetAppSetting<T>(string key)
+        {
+            var value = GetAppSetting(key);
+            return Converters.Convert<T>(value);
+        }
+
+        /// <summary>
+        /// Get an app setting entry by its key. By default this looks in the app/web.config's appSettings section.
+        /// </summary>
+        /// <param name="key">The key of the key-value entry to look for.</param>
+        /// <param name="fallbackValue">Value to use if no value is found in app/web.config</param>
+        /// <returns>Returns the value of the key-value entry matching the key given and the current Environment Tag</returns>
+        public T GetAppSetting<T>(string key, T fallbackValue)
+        {
+            try
+            {
+                var value = GetAppSetting(key);
+                return Converters.Convert<T>(value);
+            }
+            catch (Exception)
+            {
+                return fallbackValue;
+            }
+        }
+
+        /// <summary>
+        /// Get an <see cref="T:System.Collections.IDictionary"/>{TKey, TValue} of all app settings.
+        ///  By default this looks in the app/web.config's appSettings section.
+        /// </summary>
+        /// <returns>Returns all the settings in the app's app/web.config appSettings section</returns>
+        public IDictionary<string, string> GetAppSettings()
+        {
+            _keyValueRetrievalStrategy = new AppSettingsRetrievalStrategy();
+
+            return _keyValueRetrievalStrategy.GetKeyValueCollection(ConfigurationKeeper);
+        }
+
+        /// <summary>
+        /// Get an <see cref="T:System.Dynamic.ExpandoObject"/> whose properties
+        /// are the settings in the appSettings section of the app/web.config.
+        /// By default this looks in the app/web.config's appSettings section.
+        /// </summary>
+        /// <returns>Returns all the settings in the app's app/web.config
+        /// appSettings section as properties on an 
+        /// <see cref="T:System.Dynamic.ExpandoObject"/></returns>
+        public dynamic GetAppSettingsDynamic()
+        {
+            _keyValueRetrievalStrategy = new AppSettingsRetrievalStrategy();
+
+            return _keyValueRetrievalStrategy.GetKeyValueCollection(ConfigurationKeeper).ToExpando();
         }
 
         /// <summary>
@@ -74,6 +182,11 @@ namespace KonfiggyFramework
         {
             _keyValueRetrievalStrategy = keyValueRetrievalStrategy;
             return GetValue(key);
+        }
+
+        public IConfigurationLoader<T> PopulateConfig<T>() where T : new()
+        {
+            return new ConfigurationLoader<T>(this);
         }
 
         private string GetValue(string key)
@@ -106,18 +219,22 @@ namespace KonfiggyFramework
 
         private string CreateCompleteKey(string environmentTag, string key)
         {
-            return String.Format("{0}.{1}", environmentTag, key);
+            return string.Format("{0}.{1}", environmentTag, key);
         }
 
         private string GetValueForKeyInCollection(string fullKey, IDictionary<string, string> collection)
         {
+            var culture = CultureInfo.InvariantCulture;
+
             try
             {
+                var keyLowerCase = fullKey.ToLower(culture);
+
                 string value;
 
-                if (collection.ContainsKey(fullKey))
+                if (collection.Keys.Select(k => k.ToLower(culture)).Contains(keyLowerCase))
                 {
-                    value = collection[fullKey];
+                    value = collection.Single(kvp => kvp.Key.ToLower(culture) == keyLowerCase).Value;
                 }
                 else
                 {

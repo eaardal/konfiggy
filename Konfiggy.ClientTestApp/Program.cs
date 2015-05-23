@@ -12,23 +12,44 @@ namespace Konfiggy.ClientTestApp
         static void Main(string[] args)
         {
             IKonfiggy konfiggy = new KonfiggyFramework.Konfiggy();
-            konfiggy.ConfigurationKeeper = new ConfigurationKeeper();
-            //konfiggy.EnvironmentTagStrategy = new ConfigFileTagStrategy();
-            konfiggy.EnvironmentTagStrategy = new CodeTagStrategy("Dev");
-            //konfiggy.EnvironmentTagStrategy = new EnvironmentVariableTagStrategy();
-            //konfiggy.EnvironmentTagStrategy = new MachineNameTagStrategy(CreateMachineNamesMap());
-            //konfiggy.EnvironmentTagStrategy = new TextFileTagStrategy(new DefaultFileSettings());
-
-            var settingValue = konfiggy.GetAppSetting("setting");
-            Console.WriteLine("Value for MySetting key: " + settingValue);
-
-            var connStringValue = konfiggy.GetConnectionString("MyConnString");
-            Console.WriteLine("Value for connection string MyConnString: " + connStringValue);
-
-            var customStorageValue = konfiggy.GetCustom("MySetting", new CustomKeyValueRetrievalStrategy());
-            Console.WriteLine("Value for custom key/value storage: " + customStorageValue);
+            
+            DemoDynamic(konfiggy);
+            
+            DemoPopulateConfig(konfiggy);
             
             Console.ReadLine();
+        }
+
+        private static void DemoPopulateConfig(IKonfiggy konfiggy)
+        {
+            Console.WriteLine("DEMO: Populate config");
+
+            var config = konfiggy.PopulateConfig<AppConfig>().WithAppSettings().WithConnectionStrings().Populate();
+
+            Console.WriteLine("setting: " + config.Setting);
+            Console.WriteLine("MyConnString: " + config.MyConnString);
+            Console.WriteLine("MySetting: " + config.MySetting);
+
+            Console.WriteLine();
+        }
+
+        private static void DemoDynamic(IKonfiggy konfiggy)
+        {
+            Console.WriteLine("DEMO: Retrieving all settings as dynamic");
+
+            dynamic settingsDynamic = konfiggy.GetAppSettingsDynamic();
+
+            Console.WriteLine(settingsDynamic.Setting);
+            Console.WriteLine(settingsDynamic.DevMySetting);
+
+            Console.WriteLine();
+
+            dynamic connectionsDynamic = konfiggy.GetConnectionStringsDynamic();
+
+            Console.WriteLine(connectionsDynamic.DevMyConnString);
+            Console.WriteLine(connectionsDynamic.QAMyConnString);
+
+            Console.WriteLine();
         }
 
         private static IDictionary<string, string> CreateMachineNamesMap()
@@ -41,6 +62,13 @@ namespace Konfiggy.ClientTestApp
                 {"prod-environment-computer-name", "Prod"}
             };
         }
+    }
+
+    internal class AppConfig
+    {
+        public string MySetting { get; set; }
+        public string Setting { get; set; }
+        public string MyConnString { get; set; }
     }
 
     class CustomKeyValueRetrievalStrategy : IKeyValueRetrievalStrategy
